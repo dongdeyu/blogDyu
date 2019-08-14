@@ -1,0 +1,8 @@
+html,body{
+    height: 100%;
+}
+body{
+    color: #fff;
+    background-color: #f60;
+    font-size: 26px;
+}
