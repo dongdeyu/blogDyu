@@ -11,6 +11,9 @@ let swig = require("swig");
 //加载数据库模块
 let mongoose = require("mongoose");
 
+//加载body-parser，用来处理post提交过来的数据
+let bodyParser = require("body-parser");
+
 //创建app应用 => NodeJs Http.createServer();
 let app = express();
 
@@ -31,6 +34,9 @@ app.set("view engine", "html")
 
 //在开发过程当中，需要取消模板缓存
 swig.setDefaults({cache: false})
+
+//bodyparser设置
+app.use(bodyParser.urlencoded({extended:true}))
 
 /*
 * 根据不同的功能划分模块
