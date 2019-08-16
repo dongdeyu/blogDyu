@@ -73,4 +73,39 @@ router.post("/user/register", function (req,res,next){
     })
 
 })
+
+//登录接口
+router.post("/user/login", function (req,res,next){
+    let username = req.body.username;
+    let password = req.body.password;
+    //用户名是否为空
+    if(username == ""||password == ""){
+        respinseData.code = 1;
+        respinseData.message = "用户名和密码不可为空";
+        res.json(respinseData);
+        return;
+    }
+    //从数据库中查询用户名和密码是否一致，如果存在则登录成功
+    User.findOne({
+        username:username,
+        password:password
+    }).then(function (userInfo) {
+        if(!userInfo){
+            respinseData.code =2;
+            respinseData.message = "用户名或密码错误";
+            res.json(respinseData);
+            return;
+        }else{
+            //用户名和密码正确 登录成功
+            respinseData.message = "登录成功";
+            respinseData.userInfo={
+                id:userInfo.id,
+                username:userInfo.username
+            }
+            res.json(respinseData);
+            return;
+        }
+    })
+
+})
 module.exports = router;

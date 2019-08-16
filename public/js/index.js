@@ -5,6 +5,7 @@
 $(function() {
     let  $loginBox = $("#loginBox");
     let  $registerBox = $("#registerBox");
+    let  $userInfo =$("#userInfo")
     //切换
     $loginBox.find("a").on('click',function () {
         $loginBox.hide();
@@ -33,6 +34,29 @@ $(function() {
                     $registerBox.hide()
                 }
                 console.log(result)
+            }
+        })
+    })
+    //登录按钮提交事件
+    $loginBox.find("button").on('click',function () {
+        $.ajax({
+            type:"post",
+            url:"/api/user/login",
+            data:{
+                username:$loginBox.find("[name=username]").val(),
+                password:$loginBox.find("[name=password]").val(),
+            },
+            dataType:'json',
+            success:function (result) {
+                $loginBox.find(".colWarning").html(result.message)
+                if(!result.code){
+                    setTimeout(function () {
+                        $loginBox.hide();
+                        $userInfo.show()
+                        $userInfo.find(".username").html(result.userInfo.username);
+                        $userInfo.fnd(".info").html("你好，欢迎您来我的博客");
+                    },500)
+                }
             }
         })
     })
