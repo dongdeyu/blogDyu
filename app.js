@@ -17,7 +17,7 @@ let bodyParser = require("body-parser");
 let Cookies = require("cookies")
 //创建app应用 => NodeJs Http.createServer();
 let app = express();
-
+let User = require("./models/users");
 //设置静态文件托管
 //当用户访问的url以 /public 开始，那么直接返回对应的 __dirname+"/public" 下的文件
 app.use("/public",express.static(__dirname+"/public"))
@@ -47,10 +47,17 @@ app.use(function (req,res,next){
     if(req.cookies.get("userInfo")){
         try{
             req.userInfo = JSON.parse(req.cookies.get("userInfo"))
-        }catch (e) {}
+            //判断当前用户是否为管理员
+            User.findById(req.userInfo._id).then(function (userInfo) {
+                req.userInfo.isAdmin = Boolean(userInfo.isAdmin);
+                next();
+            })
+        }catch (e) {
+            next();
+        }
+    }else {
+        next();
     }
-
-    next();
 })
 /*
 * 根据不同的功能划分模块

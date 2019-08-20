@@ -33,7 +33,6 @@ $(function() {
                     $loginBox.show();
                     $registerBox.hide()
                 }
-                console.log(result)
             }
         })
     })
@@ -58,7 +57,6 @@ $(function() {
 
     //退出提交事件
     $("#logout").on("click",function () {
-        console.log(1111)
         $.ajax({
             url:"/api/user/logout",
             success:function (result) {
