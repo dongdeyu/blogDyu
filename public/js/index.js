@@ -50,12 +50,20 @@ $(function() {
             success:function (result) {
                 $loginBox.find(".colWarning").html(result.message)
                 if(!result.code){
-                    setTimeout(function () {
-                        $loginBox.hide();
-                        $userInfo.show()
-                        $userInfo.find(".username").html(result.userInfo.username);
-                        $userInfo.fnd(".info").html("你好，欢迎您来我的博客");
-                    },500)
+                   window.location.reload()
+                }
+            }
+        })
+    })
+
+    //退出提交事件
+    $("#logout").on("click",function () {
+        console.log(1111)
+        $.ajax({
+            url:"/api/user/logout",
+            success:function (result) {
+                if(!result.code){
+                    window.location.reload();
                 }
             }
         })

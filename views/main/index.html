@@ -104,18 +104,19 @@
     </div>
 
     <div class="mainRight">
-
-
-        <div class="rightBox" id="userInfo" style="display: none">
+        <!--模板判断-->
+        {% if userInfo._id %}
+        <div class="rightBox" id="userInfo">
             <div class="title"><span>用户信息</span></div>
-            <p><span class="colDark" id="username"></span></p>
+            <p><span class="colDark">{{userInfo.username}}</span></p>
 
-            <p><span class="colDanger info">你好，你是管理员，<a href="/admin">你可以点击这里进入管理</a></span></p>
+            <p><span class="colDanger">你好欢迎光临我的博客</span></p>
 
-            <p><span class="colDark logout"><a href="javascript:;">退出</a></span></p>
+            <p><span class="colDark "><a id="logout" href="javascript:;">退出</a></span></p>
         </div>
+        {% else %}
 
-        <div class="rightBox" id="loginBox" style="display: none">
+        <div class="rightBox" id="loginBox" >
             <div class="title"><span>登录</span></div>
             <div class="line"><span class="colDark">用户名：</span><input type="text" name="username" /><em></em></div>
             <div class="line"><span class="colDark">密码：</span><input type="password"  name="password"  /><em></em></div>
@@ -124,7 +125,7 @@
             <p class="colWarning textCenter"></p>
         </div>
 
-        <div class="rightBox" id="registerBox">
+        <div class="rightBox" id="registerBox" style="display: none">
             <div class="title"><span>注册</span></div>
             <div class="line"><span class="colDark">用户名：</span><input name="username" type="text" /></div>
             <div class="line"><span class="colDark">密码：</span><input  name="password" type="password" /></div>
@@ -133,7 +134,7 @@
             <p class="textRight">已有账号？<a href="#" class="colMint">马上登录</a>　</p>
             <p class="colWarning textCenter"></p>
         </div>
-
+        {% endif %}
 
         <div class="rightBox">
             <div class="title"><span>社区</span></div>

@@ -1,6 +1,7 @@
 let express = require('express');
 let router  = express.Router();
 let User = require("../models/Users");
+
 //统一返回模式
 let respinseData;
 //初始化
@@ -102,10 +103,23 @@ router.post("/user/login", function (req,res,next){
                 id:userInfo.id,
                 username:userInfo.username
             }
+            req.cookies.set("userInfo",JSON.stringify({
+                _id:userInfo._id,
+                username:userInfo.username
+            }));
             res.json(respinseData);
             return;
         }
     })
 
 })
+
+//退出接口
+router.get("/user/logout", function (req,res,next){
+    console.log(11)
+    req.cookies.set("userInfo",null);
+    respinseData.message = "退出成功";
+    res.json(respinseData);
+})
+
 module.exports = router;
