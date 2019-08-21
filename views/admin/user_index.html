@@ -17,7 +17,7 @@
     </tr>
     {% for user in users %}
     <tr>
-        <td>{{JSON.stringify(user._id)}}</td>
+        <td>{{user._id.toString()}}</td>
         <td>{{user.username}}</td>
         <td>{{user.password}}</td>
         <td>
@@ -30,5 +30,6 @@
     </tr>
     {% endfor %}
 </table>
+{% include "page.html" %}
 {% endblock %}
 
