@@ -17,7 +17,7 @@ let bodyParser = require("body-parser");
 let Cookies = require("cookies")
 //创建app应用 => NodeJs Http.createServer();
 let app = express();
-let User = require("./models/users");
+let User = require("./models/Users");
 //设置静态文件托管
 //当用户访问的url以 /public 开始，那么直接返回对应的 __dirname+"/public" 下的文件
 app.use("/public",express.static(__dirname+"/public"))
@@ -67,7 +67,7 @@ app.use("/api", require('./routers/api'))
 app.use("/", require('./routers/main'))
 
 //监听http请求
-mongoose.connect("mongodb://localhost:27018/blog",function (err) {
+mongoose.connect("mongodb://0.0.0.0:27017/blog",function (err) {
     if (err){
         console.log("连接数据库")
     }else{
