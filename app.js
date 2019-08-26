@@ -67,15 +67,23 @@ app.use("/api", require('./routers/api'))
 app.use("/", require('./routers/main'))
 
 //监听http请求
-mongoose.connect("mongodb://0.0.0.0:27017/blog",function (err) {
-    if (err){
-        console.log("连接数据库")
-    }else{
-        console.log("数据库连接成功")
-        app.listen(8089);
-    }
-})
+// mongoose.connect("mongodb://localhost:27017/blog",function (err) {
+//     if (err){
+//         console.log("连接数据库")
+//     }else{
+//         console.log("数据库连接成功")
+//         app.listen(8089);
+//     }
+// })
 
+mongoose.connect('mongodb://localhost:27018/blog',{useMongoClient:true});
+let db = mongoose.connection
+
+db.on('error', console.error.bind(console, '连接错误:'));
+db.once('open', function() {
+    console.log('连接成功');
+    app.listen(8089);
+})
 
 
 

@@ -14,6 +14,7 @@
         <th>用户名</th>
         <th>密码</th>
         <th>是否是管理员</th>
+        <th>操作</th>
     </tr>
     {% for user in users %}
     <tr>
@@ -26,6 +27,14 @@
             {% else %}
             否
             {%endif%}
+        </td>
+        <td>
+            {%if user.isAdmin%}
+                不可删除
+            {% else %}
+                <a href="/admin/user/delete?id={{user.id.toString()}}">删除</a>
+            {%endif%}
+
         </td>
     </tr>
     {% endfor %}

@@ -63,6 +63,22 @@ router.get("/user", function (req, res, next) {
 
 })
 
+
+
+/*
+* 分类删除提交
+* */
+router.get("/user/delete", function (req, res) {
+    console.log(req)
+    let id = req.query.id || "";
+    User.remove({_id: id}).then(function () {
+        res.render('admin/success', {
+            userInfo: req.userInfo,
+            message: '删除成功',
+            url: "/admin/user"
+        });
+    })
+})
 /*
 * 分类路由
 * */
