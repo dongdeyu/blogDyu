@@ -23,8 +23,8 @@ router.get("/", function (req, res, next) {
     data.page = Number(req.query.page || 1);
     data.limit = 5;
     data.pages = 0;
+
     let where={};
-    console.log(data.category)
     if(data.category){
         where.category = data.category;
     }
@@ -41,12 +41,20 @@ router.get("/", function (req, res, next) {
         return Content.where(where).find().limit(data.limit).skip(skip).populate(["category","user"]).sort({addTime:-1});
     }).then(function (contents) {
         data.contents= contents;
-        console.log(data)
         res.render("main/index",data);
     })
 
 })
-router.get("/views", function (req, res, next) {
-    res.send("views");
+router.get("/view", function (req, res) {
+
+    let contentId = req.query.contentid || "";
+    Content.findOne({
+        _id:contentId
+    }).then(function (content) {
+        data.content = content;
+        content.views++;
+        content.save();
+        res.render("main/view",data);
+    })
 })
 module.exports = router;
