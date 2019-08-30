@@ -19,3 +19,14 @@
 ###app.js         入口文件
 ###package.json        
 
+##    整体结构
+###  clone 地址或者 download 包 
+###  npm insatall 加载包 
+###  去mongo官网下载mongodb 数据库 
+###  启动数据库 
+###  node app.js
+
+
+
+
+
