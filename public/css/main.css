@@ -178,6 +178,7 @@ nav .menu a:hover, nav .menu a.focus {
 .main {
   width: 1140px;
   margin: 35px auto 0px;
+  min-height: 800px;
 }
 div .mainLeft {
   width: 750px;
