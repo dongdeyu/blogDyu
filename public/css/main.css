@@ -175,32 +175,32 @@ nav .menu a:hover, nav .menu a.focus {
   margin-bottom: -2px;
   border-bottom: 2px solid #e67e22;
 }
-main {
+.main {
   width: 1140px;
   margin: 35px auto 0px;
 }
-main .mainLeft {
+div .mainLeft {
   width: 750px;
   float: left;
 }
-main .mainLeft .listBox {
+div .mainLeft .listBox {
   background: #fff;
   padding: 20px 35px;
   text-align: center;
   margin-bottom: 30px;
 }
-main .listBoxMore {
+div .listBoxMore {
   cursor: pointer;
 }
-main .mainLeft .listBox .function {
+div .mainLeft .listBox .function {
   padding: 10px 0px;
   text-align: left;
   margin: 5px 0px 0px;
 }
-main .mainLeft .listBox .function.bortop {
+div .mainLeft .listBox .function.bortop {
   border-top: 1px solid #ddd;
 }
-main .mainLeft .listBox .function a {
+div .mainLeft .listBox .function a {
   display: inline-block;
   background: #e67e22;
   text-align: center;
@@ -213,18 +213,18 @@ main .mainLeft .listBox .function a {
   font-family: '微软雅黑';
   text-decoration: none;
 }
-main .mainLeft .textBox {
+div .mainLeft .textBox {
   width: 658px;
   height: 280px;
   border: 1px solid #ddd;
   line-height: 30px;
   padding: 10px;
 }
-main .mainLeft .em {
+div .mainLeft .em {
   font-size: 12px;
   float: right;
 }
-main .mainLeft .message textarea {
+div .mainLeft .message textarea {
   float: left;
   padding: 10px;
   width: 580px;
@@ -233,7 +233,7 @@ main .mainLeft .message textarea {
   outline: 0;
   resize: none;
 }
-main .mainLeft .message .submit {
+div .mainLeft .message .submit {
   margin-top: -1px;
   float: left;
   padding: 10px;
@@ -244,35 +244,35 @@ main .mainLeft .message .submit {
   font-size: 16px;
   cursor: pointer;
 }
-main .mainLeft .messageBox {
+div .mainLeft .messageBox {
   border-radius: 5px;
   padding: 5px 10px 10px;
   margin-bottom: 10px;
   text-align: left;
 }
-main .mainLeft .messageBox .name {
+div .mainLeft .messageBox .name {
   border-bottom: 1px solid #fff;
   line-height: 36px;
   font-size: 16px;
 }
-main .mainLeft .messageBox p {
+div .mainLeft .messageBox p {
   margin: 0px;
 }
-main .mainRight {
+div .mainRight {
   width: 360px;
   float: right;
 }
-main .mainRight .rightBox {
+div .mainRight .rightBox {
   background: #fff;
   padding: 16px 30px;
   margin-bottom: 30px;
 }
-main .mainRight .rightBox .title {
+div .mainRight .rightBox .title {
   border-bottom: 1px solid #ebebeb;
   font-size: 18px;
   margin-bottom: 20px;
 }
-main .mainRight .rightBox .title span {
+div .mainRight .rightBox .title span {
   display: inline-block;
   margin-bottom: -1px;
   height: 36px;
@@ -280,7 +280,7 @@ main .mainRight .rightBox .title span {
   border-bottom: 1px solid #e67e22;
   padding: 0px 20px 0px 0px;
 }
-main .mainRight .rightBox button {
+div .mainRight .rightBox button {
   background: #e67e22;
   width: 100%;
   height: 34px;
@@ -290,11 +290,11 @@ main .mainRight .rightBox button {
   font-size: 12px;
   font-family: '微软雅黑';
 }
-main .mainRight .rightBox .line {
+div .mainRight .rightBox .line {
   margin-bottom: 10px;
   position: relative;
 }
-main .mainRight .rightBox .line.error em {
+div .mainRight .rightBox .line.error em {
   width: 20px;
   height: 20px;
   display: block;
@@ -305,12 +305,12 @@ main .mainRight .rightBox .line.error em {
   background: url(../images/close.png) no-repeat center center;
   background-size: 80% 80%;
 }
-main .mainRight .rightBox .line span {
+div .mainRight .rightBox .line span {
   width: 60px;
   display: inline-block;
   text-align: right;
 }
-main .mainRight .rightBox .line input {
+div .mainRight .rightBox .line input {
   width: 210px;
   height: 34px;
   line-height: 34px;
@@ -318,7 +318,7 @@ main .mainRight .rightBox .line input {
   background: none;
   padding: 0px 5px;
 }
-main .mainRight .rightBox .line button {
+div .mainRight .rightBox .line button {
   background: #e67e22;
   width: 222px;
   height: 34px;
@@ -328,7 +328,7 @@ main .mainRight .rightBox .line button {
   font-size: 12px;
   font-family: '微软雅黑';
 }
-main .mainRight .rightBox .line em {
+div .mainRight .rightBox .line em {
   display: none;
 }
 dfn {

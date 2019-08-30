@@ -1,10 +1,11 @@
-var prepage = 10;
-var page = 1;
-var pages = 0;
-var comments = [];
+let prepage = 10;
+let page = 1;
+let pages = 0;
+let comments = [];
 
 //提交评论
 $('#messageBtn').on('click', function() {
+    console.log(12)
     $.ajax({
         type: 'POST',
         url: '/api/comment/post',
@@ -15,6 +16,7 @@ $('#messageBtn').on('click', function() {
         success: function(responseData) {
             //console.log(responseData);
             $('#messageContent').val('');
+            console.log(responseData.data.comments.reverse())
             comments = responseData.data.comments.reverse();
             renderComment();
         }
@@ -55,15 +57,15 @@ function renderComment() {
 
     if (page <= 1) {
         page = 1;
-        $lis.eq(0).html('<span>没有上一页了</span>');
+        $lis.eq(0).html('<span style="color: #ccc">没有上一页了</span>');
     } else {
         $lis.eq(0).html('<a href="javascript:;">上一页</a>');
     }
     if (page >= pages) {
         page = pages;
-        $lis.eq(2).html('<span>没有下一页了</span>');
+        $lis.eq(2).html('<span style="color: #ccc">没有下一页了</span>');
     } else {
-        $lis.eq(2).html('<a href="javascript:;">下一页</a>');
+        $lis.eq(2).html('<a href="javascript:;" >下一页</a>');
     }
 
     if (comments.length == 0) {
