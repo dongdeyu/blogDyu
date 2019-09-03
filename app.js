@@ -76,7 +76,7 @@ app.use("/", require('./routers/main'))
 //     }
 // })
 
-mongoose.connect('mongodb://localhost:27018/blog',{useMongoClient:true});
+mongoose.connect('mongodb://localhost:27017/blog',{useMongoClient:true});
 let db = mongoose.connection
 
 db.on('error', console.error.bind(console, '连接错误:'));

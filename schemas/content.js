@@ -1,7 +1,12 @@
 let mongoose = require("mongoose");
 
 //用户的表结构
-module.exports= new mongoose.Schema({
+let childChildSchema = new mongoose.Schema({
+    username: String,
+    postTime: Date,
+    content: String
+});
+let childSchema = new mongoose.Schema({
     //关联字段 - 分类的id
     category:{
         //类型
@@ -37,8 +42,7 @@ module.exports= new mongoose.Schema({
         default:""
     },
     //评论
-    comments:{
-        type:Array,
-        default:[]
-    }
+    comments:[childChildSchema]
 })
+
+module.exports= childSchema;
