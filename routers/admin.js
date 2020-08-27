@@ -303,27 +303,23 @@ router.get("/content/add", function (req, res) {
 * 内容保存
 * */
 router.post("/content/add", function (req, res) {
+    console.log(11111111)
+    console.log(req.body)
+    console.log(res)
+    res.setHeader('Content-type','application/x-www-form-urlencoded')
     if (req.body.title == "") {
-        res.render("admin/error", {
-            userInfo: req.userInfo,
-            message: "分类标题不能为空"
-        })
+        res.json(200, {code:20000, error: 'mess分类标题不能为空' })
         return
     }
     if (req.body.description == "") {
-        res.render("admin/error", {
-            userInfo: req.userInfo,
-            message: "简介不能为空"
-        })
+        res.json(200, {code:20000, error: '简介不能为空' })
         return
     }
     if (req.body.content == "") {
-        res.render("admin/error", {
-            userInfo: req.userInfo,
-            message: "内容不能为空"
-        })
+        res.json(200, {code:20000, error: '内容不能为空' })
         return
     }
+    console.log(999)
     new Content({
         category: req.body.category,
         title: req.body.title,
@@ -331,11 +327,8 @@ router.post("/content/add", function (req, res) {
         description: req.body.description,
         content: req.body.content,
     }).save().then(function (rs) {
-        res.render("admin/success", {
-            userInfo: req.userInfo,
-            message: "内容保存成功",
-            url: "/admin/content"
-        })
+        res.json(200, {code:10000, msg: '内容保存成功' })
+       
     });
 })
 

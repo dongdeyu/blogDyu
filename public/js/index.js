@@ -3,9 +3,15 @@
  */
 
 $(function() {
+
     let  $loginBox = $("#loginBox");
     let  $registerBox = $("#registerBox");
     let  $userInfo =$("#userInfo")
+    $("#demo").html(function aa(){
+        var a = 1;
+        console.log(123)
+      })
+    $("#demo").snippet("javascript", { style: "darkness", collapse: false, startCollapsed: false,transparent:false,menu:false});
     //切换
     $loginBox.find("a").on('click',function () {
         $loginBox.hide();
