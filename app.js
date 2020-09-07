@@ -77,7 +77,7 @@ app.use("/", require('./routers/main'))
 // })
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/blog', { useMongoClient: true });
+mongoose.connect('mongodb://localhost:27017/blog', { useNewUrlParser: true,useUnifiedTopology:true });
 let db = mongoose.connection
 
 db.on('error', console.error.bind(console, '连接错误:'));

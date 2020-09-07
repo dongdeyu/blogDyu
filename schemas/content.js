@@ -41,6 +41,10 @@ let childSchema = new mongoose.Schema({
         type: String,
         default:""
     },
+    codeCont:{
+        type: String,
+        default:""
+    },
     //评论
     comments:[childChildSchema]
 })

@@ -126,16 +126,18 @@ router.get("/user/logout", function (req,res,next){
 router.post('/comment/post', function(req, res) {
     //内容的id
     let contentId = req.body.contentid || '';
+
     let postData = {
         username: req.userInfo.username,
         postTime: new Date(),
         content: req.body.content
     };
-
+    console.log(postData)
     //查询当前这篇内容的信息
     Content.findOne({
         _id: contentId
     }).then(function(content) {
+        console.log(content.comments)
         content.comments.push(postData);
         return content.save();
     }).then(function(newContent) {

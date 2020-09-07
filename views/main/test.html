@@ -12,18 +12,42 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
   </head>
   <body>
-    <div id="summernote"></div>
-    <div onclick="getName()">hhh</div>
+    <p>
+      <textarea id='Code' cols="100" rows="20" name="Code"></textarea>
+  </p>
+  <p>
+      <input type="button" name="button" id="button" value="美化代码" onclick="F();" />
+      ，类别：
+      <select name="select" id="select">
+          <option value="html">HTML</option>
+          <option value="css">CSS</option>
+          <option value="JavaScript">JavaScript</option>
+      </select>
+      ，样式：
+      <select name="select2" id="select2">
+          <option value="bright">bright</option>
+          <option value="golden">golden</option>
+          <option value="navy">navy</option>
+          <option value="whatis">whatis</option>
+          <option value="random" selected="selected">random</option>
+      </select>
+  </p>
+  <div id="C" style="width: 600px; word-wrap: break-word;">
+      <pre id="FormatCode"></pre>
+  </div>
+  <div id="D" style="background-color: #EEF7A6">
+  </div>
     <script>
-      $('#summernote').summernote({
-        placeholder: 'Hello Bootstrap 4',
-        tabsize: 2,
-        height: 100
-      });
-      function getName(){
-        var code=$("#summernote").summernote("code");
-        console.log(code)
-      }
+      function F() {
+        var S = $("#Code").val();
+        document.getElementById("C").innerHTML = '<pre id="FormatCode"></pre>';
+        document.getElementById("FormatCode").innerText = S;
+        var V1, V2;
+        V1 = document.getElementById("select").value;
+        V2 = document.getElementById("select2").value;
+        $("pre#FormatCode").snippet(V1, { style: V2, transparent: false, showNum: false });
+        document.getElementById("D").innerText = document.getElementById("C").innerHTML;
+    }
     </script>
   </body>
 </html>

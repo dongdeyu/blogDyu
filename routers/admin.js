@@ -319,16 +319,19 @@ router.post("/content/add", function (req, res) {
         res.json(200, {code:20000, error: '内容不能为空' })
         return
     }
-    console.log(999)
+    if (req.body.codeCont == "") {
+        res.json(200, {code:20000, error: '请填写代码' })
+        return
+    }
     new Content({
         category: req.body.category,
         title: req.body.title,
         user:req.userInfo._id.toString(),
         description: req.body.description,
         content: req.body.content,
+        codeCont: req.body.codeCont,
     }).save().then(function (rs) {
         res.json(200, {code:10000, msg: '内容保存成功' })
-       
     });
 })
 

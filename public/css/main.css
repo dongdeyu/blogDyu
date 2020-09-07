@@ -1,7 +1,7 @@
 /* LESS Document */
 html,body {
   margin: 0px;
-  background: #ebebeb;
+  background: #ebebeb!important;
   font-family: '微软雅黑';
   font-size: 14px;
   width: 100%;
@@ -14,6 +14,16 @@ h4,
 h5,
 h6 {
   font-weight: normal;
+}
+a{
+  outline: none;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active{
+  text-decoration: none;
 }
 button {
   border: none;
@@ -126,37 +136,11 @@ button {
   *zoom: 1;
 }
 header {
-  height: 222px;
   position: relative;
   overflow: hidden;
 }
-header .backimg {
-  display: flex;
+header img{
   width: 100%;
-  height: 100%;
-}
-header .backimg img {
-  margin: auto;
-  display: block;
-  width:100%;
-}
-header .logo {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: 5;
-  text-align: center;
-}
-header .logo span {
-  height: 100%;
-  display: inline-block;
-  vertical-align: middle;
-}
-header .logo img {
-  display: inline-block;
-  vertical-align: middle;
 }
 nav {
   height: 56px;

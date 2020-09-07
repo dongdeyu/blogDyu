@@ -14,7 +14,8 @@ $(function () {
                 title: $("#title").val(),
                 description: $("#description").val(),
                 content: $("#content").val(),
-                category: $("#category option:selected")[0].value
+                category: $("#category option:selected")[0].value,
+                codeCont:code
             },
             dataType: 'json',
             success: function (result) {
