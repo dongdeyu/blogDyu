@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理</title>
+    <link href="/public/fontAwesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="/public/js/jquery-1.12.4.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/public/layer/layer.js"></script>
+    <script src="/public/js/admin_index.js"></script>
+    <style>
+        th,
+        td {
+            text-align: center;
+        }
+
+        body {
+            width: 100%;
+            background: #dadbef;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+
+        .content {
+
+            width: 500px;
+            height: 300px;
+            background-color: #fff;
+            top: 50%;
+            z-index: 1;
+            position: absolute;
+            left: 50%;
+            margin-top: -200px;
+            margin-left: -250px;
+            border-radius: 10px;
+        }
+
+        input {
+            border: none;
+            border-radius: 10px;
+            outline: none;
+            padding-left: 10px;
+            height: 50px;
+            font-size: 20px;
+            margin-top: 20px;
+            background-color: transparent;
+        }
+
+        .header {
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            font-size: 23px;
+        }
+
+        .admin_username,
+        .admin_passpord {
+            display: flex;
+            height: 30px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            margin-top: 0;
+        }
+
+        .admin_username div:nth-child(1),
+        .admin_passpord div:nth-child(1) {
+            line-height: 30px;
+            color: #333;
+            width: 100px;
+            text-align: justify;
+            height: 30px;
+        }
+
+        .marginRi {
+            margin-right: 20px;
+        }
+
+        .admin_username div:nth-child(1)>span,
+        .admin_passpord div:nth-child(1)>span {
+            display: inline-block
+                /* Opera */
+            ;
+            padding-left: 100%;
+        }
+
+        .cont-box {
+            margin-left: 90px;
+            margin-top: 45px;
+            width: 310px;
+        }
+
+        .admin_btn {
+            width: 190px;
+            height: 40px;
+            text-align: center;
+            border: 1px solid #ddd;
+            line-height: 40px;
+            border-radius: 6px;
+            margin: 42px auto;
+            cursor: pointer;
+        }
+
+        input::-webkit-input-placeholder {
+            /* WebKit browsers */
+            color: #ccc;
+        }
+
+        input:-moz-placeholder {
+            /* Mozilla Firefox 4 to 18 */
+            color: #ccc;
+        }
+
+        input::-moz-placeholder {
+            /* Mozilla Firefox 19+ */
+            color: #ccc;
+        }
+
+        input:-ms-input-placeholder {
+            /* Internet Explorer 10+ */
+            color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <!--导航-->
+    <div class="content">
+        <div class="cont">
+            <div class="header">管理员登录</div>
+            <div class="cont-box">
+                <div class="admin_username">
+                    <div class="marginRi">用户名<span></span></div>
+                    <div><input class="username" type="text" placeholder="请输入用户名"></div>
+                </div>
+                <div class="admin_passpord">
+                    <div class="marginRi">密码<span></span></div>
+                    <div><input class="password"  type="password" placeholder="请输入用户密码"></div>
+                </div>
+                <div class="admin_btn" id="admin_btn">
+                    登 录
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

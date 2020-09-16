@@ -3,23 +3,50 @@ let router = express.Router();
 let User = require("../models/Users")
 let Category = require("../models/Category")
 let Content = require("../models/Content")
-//判断是否是管理员进入后台页面
+//统一返回模式
+let responseData;
+//初始化
 router.use(function (req, res, next) {
+    responseData = {
+        code: 0,
+        message: ""
+    }
+    next();
+})
+
+
+
+//判断是否是管理员进入后台页面
+// router.use(function (req, res, next) {
+//     if (!req.userInfo.isAdmin) {
+//         //非管理员用户
+//         res.send("对不起，只有管理员才能进入后台页面");
+//         return;
+//     }
+//     next();
+// })
+
+//首页跳转
+router.get("/login", function (req, res, next) {
+    res.render("admin/admin_index", {
+        userInfo: req.userInfo
+    });
+
+})
+router.get("/", function (req, res, next) {
+    console.log(req)
     if (!req.userInfo.isAdmin) {
         //非管理员用户
         res.send("对不起，只有管理员才能进入后台页面");
         return;
     }
-    next();
-})
-
-//首页跳转
-router.get("/", function (req, res, next) {
+    
     res.render("admin/index", {
         userInfo: req.userInfo
     });
-})
+    
 
+})
 /*
 * 用户管理
 * */
@@ -71,7 +98,7 @@ router.get("/user", function (req, res, next) {
 router.get("/user/delete", function (req, res) {
     console.log(req)
     let id = req.query.id || "";
-    User.remove({_id: id}).then(function () {
+    User.remove({ _id: id }).then(function () {
         res.render('admin/success', {
             userInfo: req.userInfo,
             message: '删除成功',
@@ -95,7 +122,7 @@ router.get("/category", function (req, res, next) {
         //取值不能小于1
         page = Math.max(page, 1);
         let skip = (page - 1) * limit;
-        Category.find().sort({_id: -1}).limit(limit).skip(skip).then(function (categories) {
+        Category.find().sort({ _id: -1 }).limit(limit).skip(skip).then(function (categories) {
             res.render("admin/category_index", {
                 userInfo: req.userInfo,
                 categories: categories,
@@ -132,7 +159,7 @@ router.post("/category/add", function (req, res) {
         return
     }
     //数据库中是否已经存在同名的分类名称
-    Category.findOne({name: name}).then(function (rs) {
+    Category.findOne({ name: name }).then(function (rs) {
         if (rs) {
             //数据库中已经存在该分类
             res.render("admin/error", {
@@ -163,7 +190,7 @@ router.get("/category/edit", function (req, res, next) {
     //获取要修改的分类的信息，
     let id = req.query.id || "";
     let name = req.body.name || "";
-    Category.findOne({_id: id}).then(function (category) {
+    Category.findOne({ _id: id }).then(function (category) {
         console.log(category)
         //找不到id
         if (!category) {
@@ -191,7 +218,7 @@ router.get("/category/edit", function (req, res, next) {
 router.post("/category/edit", function (req, res) {
     let name = req.body.name || "";
     let id = req.query.id || "";
-    Category.findOne({_id: id}).then(function (category) {
+    Category.findOne({ _id: id }).then(function (category) {
         //找不到id
         if (!category) {
             res.render('admin/error', {
@@ -211,7 +238,7 @@ router.post("/category/edit", function (req, res) {
             } else {
                 //要修改的分类名称是否在数据库中存在
                 return Category.findOne({
-                    _id: {$ne: id},
+                    _id: { $ne: id },
                     name: name
                 })
             }
@@ -244,7 +271,7 @@ router.post("/category/edit", function (req, res) {
 * */
 router.get("/category/delete", function (req, res) {
     let id = req.query.id || "";
-    Category.remove({_id: id}).then(function () {
+    Category.remove({ _id: id }).then(function () {
         res.render('admin/success', {
             userInfo: req.userInfo,
             message: '删除成功',
@@ -269,7 +296,7 @@ router.get("/content", function (req, res) {
         //取值不能小于1
         page = Math.max(page, 1);
         let skip = (page - 1) * limit;
-        Content.find().sort({_id: -1}).limit(limit).skip(skip).populate(["category","user"]).sort({addTime:-1}).then(function (contents) {
+        Content.find().sort({ _id: -1 }).limit(limit).skip(skip).populate(["category", "user"]).sort({ addTime: -1 }).then(function (contents) {
             console.log(contents)
             res.render("admin/content_index", {
                 userInfo: req.userInfo,
@@ -290,7 +317,7 @@ router.get("/content", function (req, res) {
 * 内容添加页面
 * */
 router.get("/content/add", function (req, res) {
-    Category.find().sort({_id: -1}).then(function (categories) {
+    Category.find().sort({ _id: -1 }).then(function (categories) {
         res.render("admin/content_add", {
             userInfo: req.userInfo,
             categories: categories
@@ -306,32 +333,32 @@ router.post("/content/add", function (req, res) {
     console.log(11111111)
     console.log(req.body)
     console.log(res)
-    res.setHeader('Content-type','application/x-www-form-urlencoded')
+    res.setHeader('Content-type', 'application/x-www-form-urlencoded')
     if (req.body.title == "") {
-        res.json(200, {code:20000, error: 'mess分类标题不能为空' })
+        res.json(200, { code: 20000, error: 'mess分类标题不能为空' })
         return
     }
     if (req.body.description == "") {
-        res.json(200, {code:20000, error: '简介不能为空' })
+        res.json(200, { code: 20000, error: '简介不能为空' })
         return
     }
     if (req.body.content == "") {
-        res.json(200, {code:20000, error: '内容不能为空' })
+        res.json(200, { code: 20000, error: '内容不能为空' })
         return
     }
     if (req.body.codeCont == "") {
-        res.json(200, {code:20000, error: '请填写代码' })
+        res.json(200, { code: 20000, error: '请填写代码' })
         return
     }
     new Content({
         category: req.body.category,
         title: req.body.title,
-        user:req.userInfo._id.toString(),
+        user: req.userInfo._id.toString(),
         description: req.body.description,
         content: req.body.content,
         codeCont: req.body.codeCont,
     }).save().then(function (rs) {
-        res.json(200, {code:10000, msg: '内容保存成功' })
+        res.json(200, { code: 10000, msg: '内容保存成功' })
     });
 })
 
@@ -342,9 +369,9 @@ router.post("/content/add", function (req, res) {
 router.get("/content/edit", function (req, res) {
     let id = req.query.id || "";
     let categories = []
-    Category.find().sort({_id: -1}).then(function (rs) {
+    Category.find().sort({ _id: -1 }).then(function (rs) {
         categories = rs
-        return Content.findOne({_id: id}).populate("category")
+        return Content.findOne({ _id: id }).populate("category")
     }).then(function (content) {
         console.log(content)
         if (!content) {
@@ -356,7 +383,7 @@ router.get("/content/edit", function (req, res) {
         } else {
             res.render("admin/content_edit", {
                 userInfo: req.userInfo,
-                categories:categories,
+                categories: categories,
                 content: content
             })
         }
@@ -390,20 +417,20 @@ router.post("/content/edit", function (req, res) {
         })
         return
     }
-     Content.update({
-        _id:id
-     },{
-         category: req.body.category,
-         title: req.body.title,
-         description: req.body.description,
-         content: req.body.content,
-     }).then(function () {
-         res.render("admin/success", {
-             userInfo: req.userInfo,
-             message: '修改成功',
-             url: '/admin/content'
-         })
-     })
+    Content.update({
+        _id: id
+    }, {
+        category: req.body.category,
+        title: req.body.title,
+        description: req.body.description,
+        content: req.body.content,
+    }).then(function () {
+        res.render("admin/success", {
+            userInfo: req.userInfo,
+            message: '修改成功',
+            url: '/admin/content'
+        })
+    })
 })
 
 /*
@@ -411,7 +438,7 @@ router.post("/content/edit", function (req, res) {
 * */
 router.get("/content/delete", function (req, res) {
     let id = req.query.id || "";
-    Content.remove({_id: id}).then(function () {
+    Content.remove({ _id: id }).then(function () {
         res.render('admin/success', {
             userInfo: req.userInfo,
             message: '删除成功',
@@ -419,5 +446,63 @@ router.get("/content/delete", function (req, res) {
         });
     })
 })
+
+
+/*
+* 管理员登录
+* */
+router.post("/login", function (req, res, next) {
+    let username = req.body.username;
+    let password = req.body.password;
+    console.log(username)
+    console.log(password)
+    //用户名是否为空
+    if (username == "" || password == "") {
+        responseData.code = 1;
+        responseData.message = "用户名和密码不可为空";
+        res.json(responseData);
+        return;
+    }
+    //从数据库中查询用户名和密码是否一致，如果存在则登录成功
+    User.findOne({
+        username: username,
+        password: password
+    }).then(function (userInfo) {
+        if (!userInfo) {
+            responseData.code = 2;
+            responseData.message = "用户名或密码错误";
+            res.json(responseData);
+            return;
+        } else {
+            console.log(userInfo)
+            if (!userInfo.isAdmin) {
+                responseData.code = 2;
+                responseData.message = "用户无权限";
+                res.json(responseData);
+                return;
+            } else {
+                responseData.code = 0;
+                responseData.message = "登录成功";
+                res.json(responseData);
+                return;
+            }
+            //用户名和密码正确 登录成功
+            // responseData.message = "登录成功";
+            // responseData.userInfo={
+            //     id:userInfo.id,
+            //     username:userInfo.username
+            // }
+            // req.cookies.set("userInfo",JSON.stringify({
+            //     _id:userInfo._id,
+            //     username:userInfo.username
+            // }));
+            // res.json(responseData);
+            // return;
+        }
+    })
+
+})
+
+
 
 module.exports = router;
