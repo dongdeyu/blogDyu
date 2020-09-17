@@ -142,6 +142,8 @@
 
 </html>
 <script>
+    // 初始定时器
+     let myInterval = null
     /*********************背景粒子特效*************************/
     window.onload = function () {
         //配置
@@ -180,31 +182,42 @@
     }, function () {
         $(this).attr("src", "/public/images/pause.png")
     })
-
     $(".play").click(function () {
         $(this).hide()
         $('.pause').show()
-        console.log($("#bgMusic"))
         document.getElementById("bgMusic").play()
         $(".statue").html('')
         let mar = "<marquee>播放中(*＾-＾*)</marquee>"
         $(".statue").append(mar)
-        $(".musicCont").animate({ right: "-209px" }, 500);
-        setTimeout(() => {
-            $(".showMusic").show();
-        }, 600)
-
+      
     })
     $(".showMusic").click(function () {
         $(this).hide()
         $(".musicCont").animate({ right: "0" }, 500);
+        getInnerVal()
     })
     $(".pause").click(function () {
         $(this).hide()
         $('.play').show()
         document.getElementById("bgMusic").pause()
         $(".statue").text("听一首歌(*＾-＾*)")
+      
     })
+    // 如果弹出框显示则清空定时器
+    function getInnerVal() {
+        myInterval = setInterval(() => {
+            if ($(".showMusic").css('display') == 'none') {
+                $(".musicCont").animate({ right: "-209px" }, 500);
+                setTimeout(() => {
+                    $(".showMusic").show();
+                }, 600)
+                clearInterval(myInterval)
+            }
+
+        }, 5000)
+    }
+    // 初始化页面时先调取
+    getInnerVal()
     /*********************结束*************************/
 
     /*******************循环播放**************************/
