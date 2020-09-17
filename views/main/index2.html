@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/public/js/jquery-1.12.4.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="dianji">
+        点击
+    </div>
+<script>
+    $("#dianji").click(function(){
+        window.location.href='/indexNew'
+    })
+    setTimeout(()=>{
+        $("#dianji").click()
+    },3000)
+</script>
+</body>
+</html>

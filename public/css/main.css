@@ -147,6 +147,8 @@ nav {
   border-top: 1px solid #ebebeb;
   border-bottom: 2px solid #e1e1e1;
   background: #fff;
+  position: relative;
+  z-index: 2;
 }
 nav .menu {
   text-align: center;
@@ -166,6 +168,8 @@ nav .menu a:hover, nav .menu a.focus {
   width: 1140px;
   margin: 35px auto 0px;
   min-height: 800px;
+  z-index: 2;
+  position: relative;
 }
 div .mainLeft {
   width: 750px;
@@ -397,7 +401,51 @@ footer .fotBox span {
   line-height: 79px;
   border-top: 1px solid #303030;
   color: #555;
+  position: relative;
+  z-index: 2;
 }
 .snippet-wrap .snippet-num li{
   padding-left: 0!important;
+}
+.musicCont{
+  position: fixed;
+  bottom: 150px;
+  right: -209px;
+  background: rgba(0,0,0,0.6);
+  z-index: 2;
+  color: #ccc;
+  display: flex;
+  padding: 8px;
+  border-radius: 4px;
+}
+.musicCont img{
+  width: 25px;
+}
+.musicCont div{
+  margin: 0 5px;
+}
+.musicCont div:nth-child(2){
+ line-height: 25px;
+ width: 113px;
+ height: 25px;
+}
+.musicCont div:nth-child(3),.musicCont div:nth-child(4){
+  cursor: pointer;
+ }
+ .pause{
+   display: none;
+ }
+ 
+.showMusic{
+  position: fixed;
+  bottom: 150px;
+  right: 0px;
+  background: rgba(0,0,0,0.6);
+  z-index: 2;
+  color: #ccc;
+  display: flex;
+  padding: 8px;
+  border-radius: 4px;
+  display: none;
+  cursor: pointer;
 }

@@ -17,6 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
+    <script src="/public/js/canvas-particle.js"></script>
 
 </head>
 
@@ -57,63 +58,175 @@
     </nav>
 
 
-
-    <div class="clear main">
-        <div class="mainLeft">
-            {% block content %}{% endblock %}
-        </div>
-
-        <div class="mainRight">
-
-
-            {% if userInfo._id %}
-            <div class="rightBox" id="userInfo">
-                <div class="title"><span>用户信息</span></div>
-                <p><span class="colDark">{{userInfo.username}}</span></p>
-
-                {% if userInfo.isAdmin %}
-                <p>
-                    <span class="colDanger">你好，管理员！</span>
-                    <a href="/admin/login">进入管理</a>
-                </p>
-                {% else %}
-                <p><span class="colDanger">你好，欢迎光临我的博客！</span></p>
-                {% endif %}
-
-                <p><span class="colDark"><a href="javascript:;" id="logout">退出</a></span></p>
+    <div id="mydiv">
+        <div class="clear main">
+            <div class="mainLeft">
+                {% block content %}{% endblock %}
             </div>
-            {% else %}
-            <div class="rightBox" id="loginBox">
-                <div class="title"><span>登录</span></div>
-                <div class="line"><span class="colDark">用户名：</span><input name="username" type="text" /><em></em></div>
-                <div class="line"><span class="colDark">密码：</span><input name="password" type="password" /><em></em>
+
+            <div class="mainRight">
+
+
+                {% if userInfo._id %}
+                <div class="rightBox" id="userInfo">
+                    <div class="title"><span>用户信息</span></div>
+                    <p><span class="colDark">{{userInfo.username}}</span></p>
+
+                    {% if userInfo.isAdmin %}
+                    <p>
+                        <span class="colDanger">你好，管理员！</span>
+                        <a href="/admin/login">进入管理</a>
+                    </p>
+                    {% else %}
+                    <p><span class="colDanger">你好，欢迎光临我的博客！</span></p>
+                    {% endif %}
+
+                    <p><span class="colDark"><a href="javascript:;" id="logout">退出</a></span></p>
                 </div>
-                <div class="line"><span class="colDark"></span><button>登 录</button></div>
-                <p class="textRight">还没注册？<a href="javascript:;" class="colMint">马上注册</a>　</p>
-                <p class="colWarning textCenter"></p>
+                {% else %}
+                <div class="rightBox" id="loginBox">
+                    <div class="title"><span>登录</span></div>
+                    <div class="line"><span class="colDark">用户名：</span><input name="username" type="text" /><em></em>
+                    </div>
+                    <div class="line"><span class="colDark">密码：</span><input name="password" type="password" /><em></em>
+                    </div>
+                    <div class="line"><span class="colDark"></span><button>登 录</button></div>
+                    <p class="textRight">还没注册？<a href="javascript:;" class="colMint">马上注册</a>　</p>
+                    <p class="colWarning textCenter"></p>
+                </div>
+
+                <div class="rightBox" id="registerBox" style="display: none;">
+                    <div class="title"><span>注册</span></div>
+                    <div class="line"><span class="colDark">用户名：</span><input name="username" type="text" /></div>
+                    <div class="line"><span class="colDark">密码：</span><input name="password" type="password" /></div>
+                    <div class="line"><span class="colDark">确认：</span><input name="repassword" type="password" /></div>
+                    <div class="line"><span class="colDark"></span><button>注 册</button></div>
+                    <p class="textRight">已有账号？<a href="javascript:;" class="colMint">马上登录</a>　</p>
+                    <p class="colWarning textCenter"></p>
+                </div>
+                {%endif%}
+
+                <div class="rightBox">
+                    <div class="title"><span>呵呵哒</span></div>
+
+                </div>
             </div>
 
-            <div class="rightBox" id="registerBox" style="display: none;">
-                <div class="title"><span>注册</span></div>
-                <div class="line"><span class="colDark">用户名：</span><input name="username" type="text" /></div>
-                <div class="line"><span class="colDark">密码：</span><input name="password" type="password" /></div>
-                <div class="line"><span class="colDark">确认：</span><input name="repassword" type="password" /></div>
-                <div class="line"><span class="colDark"></span><button>注 册</button></div>
-                <p class="textRight">已有账号？<a href="javascript:;" class="colMint">马上登录</a>　</p>
-                <p class="colWarning textCenter"></p>
-            </div>
-            {%endif%}
 
-            <div class="rightBox">
-                <div class="title"><span>呵呵哒</span></div>
-               
-            </div>
         </div>
-
-
     </div>
 
-    <div class="copyright textCenter">Copyright © miaov.com 版权所有 | 京ICP备08102442号</div>
+    <div class="copyright textCenter">Copyright © dongdeyu.com 版权所有 | 京ICP备11111111号</div>
+
+    <!-- <audio id="bgMusic" controls loop="loop" style="z-index: 66;position: relative;" hidden>
+        <source src="/public/video/2.mp3">
+        <source src="/public/video/1.mp3">
+    </audio> -->
+    <div class="musicCont">
+        <div>
+            <img src="/public/images/music.png" alt="music">
+        </div>
+        <div class="statue">
+            听一首歌(*＾-＾*)
+        </div>
+        <div>
+            <img class="play" src="/public/images/play.png" alt="play">
+            <img class="pause" src="/public/images/pause.png" alt="play">
+        </div>
+    </div>
+    <div class="showMusic">
+        弹出来
+    </div>
+    <div id="audioBox" style="display: none;"></div>
 </body>
 
 </html>
+<script>
+    /*********************背景粒子特效*************************/
+    window.onload = function () {
+        //配置
+        var config = {
+            vx: 2,	//小球x轴速度,正为右，负为左
+            vy: 2,	//小球y轴速度
+            height: 3,	//小球高宽，其实为正方形，所以不宜太大
+            width: 3,
+            count: 200,		//点个数
+            color: "230,225,225", 	//点颜色
+            stroke: "204,204,204", 		//线条颜色
+            dist: 10000, 	//点吸附距离
+            e_dist: 10000, 	//鼠标吸附加速距离
+            max_conn: 10 	//点到点最大连接数
+        }
+
+        //调用
+        CanvasParticle(config);
+    }
+    /*********************结束*************************/
+
+    /*********************音乐播放器功能*************************/
+    $(".musicCont").animate({ right: "0" }, 500);
+    $(".play").hover(function () {
+        if ($(this)[0].className == 'play') {
+            $(this).attr("src", "/public/images/play2.png")
+        }
+
+    }, function () {
+        if ($(this)[0].className == 'play') {
+            $(this).attr("src", "/public/images/play.png")
+        }
+    })
+    $(".pause").hover(function () {
+        $(this).attr("src", "/public/images/pause2.png")
+    }, function () {
+        $(this).attr("src", "/public/images/pause.png")
+    })
+
+    $(".play").click(function () {
+        $(this).hide()
+        $('.pause').show()
+        console.log($("#bgMusic"))
+        document.getElementById("bgMusic").play()
+        $(".statue").html('')
+        let mar = "<marquee>播放中(*＾-＾*)</marquee>"
+        $(".statue").append(mar)
+        $(".musicCont").animate({ right: "-209px" }, 500);
+        setTimeout(() => {
+            $(".showMusic").show();
+        }, 600)
+
+    })
+    $(".showMusic").click(function () {
+        $(this).hide()
+        $(".musicCont").animate({ right: "0" }, 500);
+    })
+    $(".pause").click(function () {
+        $(this).hide()
+        $('.play').show()
+        document.getElementById("bgMusic").pause()
+        $(".statue").text("听一首歌(*＾-＾*)")
+    })
+    /*********************结束*************************/
+
+    /*******************循环播放**************************/
+    window.onload = function () {
+        var arr = ["/public/video/1.mp3", "/public/video/2.mp3"];               //把需要播放的歌曲从后往前排，这里已添加两首音乐，可继续添加多个音乐 
+        var myAudio = new Audio();
+        myAudio.preload = true;
+        myAudio.id = 'bgMusic'
+        myAudio.controls = true;
+        myAudio.src = arr[0];
+        myAudio.addEventListener('ended', playEndedHandler, false);
+        document.getElementById("audioBox").appendChild(myAudio);
+        myAudio.loop = false;//禁止循环，否则无法触发ended事件 
+        function playEndedHandler() {
+            arr.shift()
+            if (arr.length == 0) {
+                arr = ["/public/video/1.mp3", "/public/video/2.mp3"]
+            }
+            myAudio.src = arr[0];
+            myAudio.play();
+            // !arr.length && myAudio.removeEventListener('ended', playEndedHandler, false);//只有一个元素时解除绑定 
+        }
+    }
+    /*******************循环播放结束**************************/
+</script>
