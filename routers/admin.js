@@ -34,17 +34,16 @@ router.get("/login", function (req, res, next) {
 
 })
 router.get("/", function (req, res, next) {
-    console.log(req)
+    console.log(req.userInfo)
     if (!req.userInfo.isAdmin) {
         //非管理员用户
         res.send("对不起，只有管理员才能进入后台页面");
         return;
     }
-    
     res.render("admin/index", {
         userInfo: req.userInfo
     });
-    
+
 
 })
 /*
@@ -297,7 +296,6 @@ router.get("/content", function (req, res) {
         page = Math.max(page, 1);
         let skip = (page - 1) * limit;
         Content.find().sort({ _id: -1 }).limit(limit).skip(skip).populate(["category", "user"]).sort({ addTime: -1 }).then(function (contents) {
-            console.log(contents)
             res.render("admin/content_index", {
                 userInfo: req.userInfo,
                 contents: contents,
@@ -330,9 +328,7 @@ router.get("/content/add", function (req, res) {
 * 内容保存
 * */
 router.post("/content/add", function (req, res) {
-    console.log(11111111)
-    console.log(req.body)
-    console.log(res)
+
     res.setHeader('Content-type', 'application/x-www-form-urlencoded')
     if (req.body.title == "") {
         res.json(200, { code: 20000, error: 'mess分类标题不能为空' })
@@ -373,7 +369,6 @@ router.get("/content/edit", function (req, res) {
         categories = rs
         return Content.findOne({ _id: id }).populate("category")
     }).then(function (content) {
-        console.log(content)
         if (!content) {
             res.render("admin/error", {
                 userInfo: req.userInfo,
@@ -454,8 +449,6 @@ router.get("/content/delete", function (req, res) {
 router.post("/login", function (req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
-    console.log(username)
-    console.log(password)
     //用户名是否为空
     if (username == "" || password == "") {
         responseData.code = 1;
@@ -474,16 +467,28 @@ router.post("/login", function (req, res, next) {
             res.json(responseData);
             return;
         } else {
-            console.log(userInfo)
             if (!userInfo.isAdmin) {
                 responseData.code = 2;
                 responseData.message = "用户无权限";
                 res.json(responseData);
                 return;
             } else {
+                responseData.userInfo = {
+                    id: userInfo.id,
+                    username: userInfo.username
+                }
                 responseData.code = 0;
                 responseData.message = "登录成功";
+                responseData.userInfo = {
+                    id: userInfo.id,
+                    username: userInfo.username
+                }
+                req.cookies.set("userInfo", JSON.stringify({
+                    _id: userInfo._id,
+                    username: userInfo.username
+                }));
                 res.json(responseData);
+
                 return;
             }
             //用户名和密码正确 登录成功

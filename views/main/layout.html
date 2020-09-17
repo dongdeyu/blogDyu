@@ -41,19 +41,19 @@
 
     <nav>
         <div class="menu">
-            {%if category == ''%}
             <a href="/" class="focus">首页</a>
-            {%else%}
-            <a href="/">首页</a>
-            {%endif%}
-
-            {%for cate in categories%}
+            <a href="/">全部文章</a>
+            <a href="/">学无止境</a>
+            <a href="/">慢生活</a>
+            <a href="/">关于我的</a>
+            <a href="/">留言板</a>
+            <!-- {%for cate in categories%}
             {%if category == cate.id%}
             <a href="/?category={{cate.id}}" class="focus">{{cate.name}}</a>
             {%else%}
             <a href="/?category={{cate.id}}">{{cate.name}}</a>
             {%endif%}
-            {%endfor%}
+            {%endfor%} -->
         </div>
     </nav>
 
@@ -107,7 +107,20 @@
                 {%endif%}
 
                 <div class="rightBox">
-                    <div class="title"><span>呵呵哒</span></div>
+                    <div class="title"><span>文章分类</span></div>
+                    <ul>
+                        {%for cate in categories%}
+                        {%if category == cate.id%}
+                        <li>
+                            <a href="/?category={{cate.id}}" class="focus">{{cate.name}}</a>
+                        </li>
+                        {%else%}
+                        <li>
+                            <a href="/?category={{cate.id}}">{{cate.name}}</a>
+                        </li>
+                        {%endif%}
+                        {%endfor%}
+                    </ul>
 
                 </div>
             </div>
@@ -143,7 +156,7 @@
 </html>
 <script>
     // 初始定时器
-     let myInterval = null
+    let myInterval = null
     /*********************背景粒子特效*************************/
     window.onload = function () {
         //配置
@@ -189,7 +202,7 @@
         $(".statue").html('')
         let mar = "<marquee>播放中(*＾-＾*)</marquee>"
         $(".statue").append(mar)
-      
+
     })
     $(".showMusic").click(function () {
         $(this).hide()
@@ -201,7 +214,7 @@
         $('.play').show()
         document.getElementById("bgMusic").pause()
         $(".statue").text("听一首歌(*＾-＾*)")
-      
+
     })
     // 如果弹出框显示则清空定时器
     function getInnerVal() {
@@ -217,7 +230,7 @@
         }, 5000)
     }
     // 初始化页面时先调取
-    getInnerVal() 
+    getInnerVal()
     /*********************结束*************************/
 
     /*******************循环播放**************************/

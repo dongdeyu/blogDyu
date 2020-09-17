@@ -146,9 +146,10 @@ nav {
   height: 56px;
   border-top: 1px solid #ebebeb;
   border-bottom: 2px solid #e1e1e1;
-  background: #fff;
+  background: #ad9f9f;
   position: relative;
   z-index: 2;
+
 }
 nav .menu {
   text-align: center;
@@ -159,6 +160,7 @@ nav .menu a {
   height: 56px;
   line-height: 56px;
   text-decoration: none;
+  color: #fff;
 }
 nav .menu a:hover, nav .menu a.focus {
   margin-bottom: -2px;
