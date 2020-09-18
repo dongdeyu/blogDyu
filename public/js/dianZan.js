@@ -27,6 +27,7 @@ class HeartsFlow {
     }
     setHeartsList() {
         let arr = [];
+        console.log(123)
         for (let i = 0; i < this.heartsAmount; i++) {
             let currentSize = this.getRandom(10, 15);
             let dt = {

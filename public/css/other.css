@@ -55,7 +55,6 @@
   background-color: #fff;
   padding         : 10px;
   padding-bottom  : 100px;
-  overflow: hidden;
 }
 
 .contArea {
@@ -146,6 +145,7 @@ textArea:-ms-input-placeholder {
   font-size    : 15px;
   color        : #fff;
   cursor       : pointer;
+  overflow: hidden;
 }
 
 @-webkit-keyframes changeImg {
