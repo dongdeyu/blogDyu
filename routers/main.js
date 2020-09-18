@@ -37,11 +37,9 @@ router.get("/", function (req, res, next) {
         //取值不能小于1
         data.page = Math.max(data.page, 1);
         let skip = (data.page - 1) * data.limit;
-        console.log(where)
         return Content.where(where).find().limit(data.limit).skip(skip).populate(["category","user"]).sort({addTime:-1});
     }).then(function (contents) {
         data.contents= contents;
-        console.log(data)
         res.render("main/index",data);
     })
 
@@ -66,11 +64,9 @@ router.get("/indexNew", function (req, res, next) {
         //取值不能小于1
         data.page = Math.max(data.page, 1);
         let skip = (data.page - 1) * data.limit;
-        console.log(where)
         return Content.where(where).find().limit(data.limit).skip(skip).populate(["category","user"]).sort({addTime:-1});
     }).then(function (contents) {
         data.contents= contents;
-        console.log(data)
         res.render("main/index",data);
     })
 
@@ -84,7 +80,12 @@ router.get("/view", function (req, res) {
         data.content = content;
         content.views++;
         content.save();
+        console.log(data)
         res.render("main/view",data);
     })
 })
+router.get("/notes", function (req, res) {
+    res.render("main/notes",data)
+})
+
 module.exports = router;

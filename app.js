@@ -82,7 +82,6 @@ let db = mongoose.connection
 
 db.on('error', console.error.bind(console, '连接错误:'));
 db.once('open', function() {
-    console.log('hh')
-    console.log('连接成功');
+    console.log('数据库连接成功');
     app.listen(8089);
 })

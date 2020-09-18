@@ -1,0 +1,121 @@
+{%extends 'layout.html'%}
+
+{%block content%}
+<link href="/public/css/other.css" rel="stylesheet" type="text/css">
+
+<div class="backConts">
+    <div class="tips">
+        <div class="tipsCont"></div>
+        <div class="zanCont">
+            <div class="liker">
+                <canvas class="hearts-canvas"></canvas>
+                <button class="btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path
+                            d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="contArea">
+        <div class="textArea">
+            <textarea name="" id="" cols="30" rows="10" placeholder="有事没事说两句..."></textarea>
+        </div>
+        <div class="border"></div>
+        <div class="headImg">
+            {% if userInfo._id %}
+            <div><img src="/public/images/head.jpg" alt="head"></div>
+            {%else%}
+            <p class="bgDanger" style="line-height: 30px;">你还没有登录，请先登录！</p>
+            {%endif%}
+        </div>
+        <div class="nameText">
+            {{userInfo.username}}：
+        </div>
+    </div>
+    <div class="alertDialog">发 送 <b class="shan"></b></div>
+    <div class="answerCont">
+        <div class="pl">评论</div>
+        <div class="rigEd">
+            <span class="size">14</span>
+            <span>人参与,</span>
+            <span class="size">6</span>
+            <span>条评论</span>
+        </div>
+    </div>
+    <div class="commentCont">
+        <div></div>
+        <div>最新评论</div>
+    </div>
+    <div class="commentsLists">
+        <ul>
+            <li>
+                <div><img src="/public/images/head.jpg" width="40" alt=""></div>
+                <div>
+                    <div class="tsbs">
+                        <div>我的名字叫顺溜</div>
+                        <div>2019年9月20日 22:58</div>
+                    </div>
+                    <div class="cont">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</div>
+                </div>
+            </li>
+            <li>
+                <div><img src="/public/images/head.jpg" width="40" alt=""></div>
+                <div>
+                    <div class="tsbs">
+                        <div>我的名字叫顺溜</div>
+                        <div>2019年9月20日 22:58</div>
+                    </div>
+                    <div class="cont">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</div>
+                </div>
+            </li>
+            <li>
+                <div><img src="/public/images/head.jpg" width="40" alt=""></div>
+                <div>
+                    <div class="tsbs">
+                        <div>我的名字叫顺溜</div>
+                        <div>2019年9月20日 22:58</div>
+                    </div>
+                    <div class="cont">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</div>
+                </div>
+            </li>
+            <li>
+                <div><img src="/public/images/head.jpg" width="40" alt=""></div>
+                <div>
+                    <div class="tsbs">
+                        <div>我的名字叫顺溜</div>
+                        <div>2019年9月20日 22:58</div>
+                    </div>
+                    <div class="cont">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</div>
+                </div>
+            </li>
+            <li>
+                <div><img src="/public/images/head.jpg" width="40" alt=""></div>
+                <div>
+                    <div class="tsbs">
+                        <div>我的名字叫顺溜</div>
+                        <div>2019年9月20日 22:58</div>
+                    </div>
+                    <div class="cont">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<script src="/public/js/comment.js"></script>
+<script src="/public/js/dianZan.js"></script>
+<script>
+    let tipsArray = [
+        '努力成为你最喜欢的那种人，就算不成功，至少你会喜欢这样努力的自己。',
+        '努力是一种生活态度，与年龄无关。',
+        '没多少人的人生是容易的，你吃过的苦，受过的累，总有一天，会变成生活对你的嘉奖。'
+    ]
+    let tisRandom = Math.floor(Math.random() * tipsArray.length)
+    console.log(tisRandom)
+    $(".tipsCont").html(tipsArray[tisRandom])
+</script>
+{%endblock%}
