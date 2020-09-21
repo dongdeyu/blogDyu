@@ -1,0 +1,22 @@
+<!-- 
+    date:2020 09 21
+    authoer:ddyu
+    contents:留言板后台内容增加 查询 删除功能
+ -->
+{% extends 'layout.html' %}
+
+{% block main%}
+<ol class="breadcrumb">
+    <li><a href="/admin">留言管理</a></li>
+    <li><span>留言编辑</span></li>
+</ol>
+
+<form role="form" method="post">
+    <div class="form-group">
+        <label for="name">留言内容</label>
+        <input type="text" value="{{comment.content}}" class="form-control" name="content" id="content"
+            placeholder="请输入留言内容" />
+    </div>
+    <button type="submit" class="btn btn-default">提交</button>
+</form>
+{% endblock %}
