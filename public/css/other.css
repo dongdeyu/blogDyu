@@ -5,14 +5,16 @@
   border-bottom  : 1px solid #ddd;
   height         : 40px;
   display        : flex;
-  justify-content: space-between;
   position       : relative;
-}
 
+}
+.tipsCont{
+  margin-left: 50px;
+}
 .liker {
   position: absolute;
   top     : -410px;
-  right   : -80px;
+  left   : -80px;
 }
 
 .liker span {
