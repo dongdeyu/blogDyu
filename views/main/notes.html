@@ -2,7 +2,7 @@
 
 {%block content%}
 <link href="/public/css/other.css" rel="stylesheet" type="text/css">
-
+<link rel="stylesheet" href="/public/css/currentPage.css">
 <div class="backConts">
     <div class="tips">
         <div class="tipsCont"></div>
@@ -28,20 +28,25 @@
             {% if userInfo._id %}
             <div><img src="/public/images/head.jpg" alt="head"></div>
             {%else%}
-            <p class="bgDanger" style="line-height: 30px;">你还没有登录，请先登录！</p>
+            <div><img src="/public/images/head.jpg" alt="head"></div>
             {%endif%}
         </div>
         <div class="nameText">
+            {% if userInfo._id %}
             {{userInfo.username}}：
+            {%else%}
+            未登录
+            {%endif%}
+
         </div>
     </div>
     <div class="alertDialog">发 送 <b class="shan"></b></div>
     <div class="answerCont">
         <div class="pl">评论</div>
         <div class="rigEd">
-            <span class="size">14</span>
+            <span class="size allCounts"></span>
             <span>人参与,</span>
-            <span class="size">6</span>
+            <span class="size allReviews"></span>
             <span>条评论</span>
         </div>
     </div>
@@ -50,64 +55,26 @@
         <div>最新评论</div>
     </div>
     <div class="commentsLists">
-        <ul>
-            <li>
-                <div><img src="/public/images/head.jpg" width="40" alt=""></div>
-                <div>
-                    <div class="tsbs">
-                        <div>我的名字叫顺溜</div>
-                        <div>2019年9月20日 22:58</div>
-                    </div>
-                    <div class="cont">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</div>
-                </div>
-            </li>
-            <li>
-                <div><img src="/public/images/head.jpg" width="40" alt=""></div>
-                <div>
-                    <div class="tsbs">
-                        <div>我的名字叫顺溜</div>
-                        <div>2019年9月20日 22:58</div>
-                    </div>
-                    <div class="cont">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</div>
-                </div>
-            </li>
-            <li>
-                <div><img src="/public/images/head.jpg" width="40" alt=""></div>
-                <div>
-                    <div class="tsbs">
-                        <div>我的名字叫顺溜</div>
-                        <div>2019年9月20日 22:58</div>
-                    </div>
-                    <div class="cont">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</div>
-                </div>
-            </li>
-            <li>
-                <div><img src="/public/images/head.jpg" width="40" alt=""></div>
-                <div>
-                    <div class="tsbs">
-                        <div>我的名字叫顺溜</div>
-                        <div>2019年9月20日 22:58</div>
-                    </div>
-                    <div class="cont">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</div>
-                </div>
-            </li>
-            <li>
-                <div><img src="/public/images/head.jpg" width="40" alt=""></div>
-                <div>
-                    <div class="tsbs">
-                        <div>我的名字叫顺溜</div>
-                        <div>2019年9月20日 22:58</div>
-                    </div>
-                    <div class="cont">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</div>
-                </div>
-            </li>
+        <ul class="commentsListsUl">
         </ul>
+        <div id='test'></div>
+    </div>
+    <div id="noLists">
+        <div>
+            <img src="/public/images/noLists.png" alt="">
+        </div>
+        <div class="names">
+            暂无内容
+        </div>
     </div>
 
 </div>
+<script src="/public//js/currentPage.js"></script>
+<script src="/public/layer/layer.js"></script>
+<script src="/public/js/utils.js"></script>
 <script src="/public/js/dianZan.js"></script>
-<script src="/public/js/comment.js"></script>
 <script src="/public/js/notes.js"></script>
+
 <script>
     let tipsArray = [
         '努力成为你最喜欢的那种人，就算不成功，至少你会喜欢这样努力的自己。',
@@ -115,7 +82,9 @@
         '没多少人的人生是容易的，你吃过的苦，受过的累，总有一天，会变成生活对你的嘉奖。'
     ]
     let tisRandom = Math.floor(Math.random() * tipsArray.length)
-    console.log(tisRandom)
     $(".tipsCont").html(tipsArray[tisRandom])
+    var nums = 400, // 总数
+        counts = 10; // 每页个数
+    
 </script>
 {%endblock%}

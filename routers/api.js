@@ -135,12 +135,10 @@ router.post('/comment/post', function (req, res) {
         postTime: new Date(),
         content: req.body.content
     };
-    console.log(postData)
     //查询当前这篇内容的信息
     Content.findOne({
         _id: contentId
     }).then(function (content) {
-        console.log(content.comments)
         content.comments.push(postData);
         return content.save();
     }).then(function (newContent) {
@@ -166,55 +164,56 @@ router.get('/comment', function (req, res) {
 
 // 留言板功能(添加)
 router.post('/addComments', function (req, res) {
-    let comments = new Comments({
-        username: req.userInfo.username,
-        reviewTime: Date.now(),
-        content: req.body.content
-    });
-    comments.save();
-    responseData.message = '评论成功';
-    responseData.code = 2000;
-    res.json(responseData);
+    if (req.userInfo.username) {
+        let comments = new Comments({
+            username: req.userInfo.username,
+            reviewTime: new Date(),
+            content: req.body.content
+        });
+        comments.save();
+        responseData.message = '评论成功';
+        responseData.code = 2000;
+        res.json(responseData);
+    } else {
+        responseData.message = '请登录后评论';
+        responseData.code = 4;
+        res.json(responseData);
+    }
+
 });
 // 留言板功能(查询)
 router.post('/getCommentsLists', function (req, res) {
     let page = Number(req.body.pageSize || 1);
-    // console.log(req.body.pageSize)
-    let prewCount = req.body.pageSize==1?0:req.body.pageSize*10-10+1;
-    let nextCount = req.body.pageSize==1?10:req.body.pageSize*10+1;
+    const limit = 10;
+    let pages = 0;
+    let allUsers = 0; //参与的总人数
     Comments.count().then(function (count) {
-        // const limit = 10;
-        // pages = Math.ceil(count / 10);
-        // //取值不能超过pages
-        // page = Math.min(page, pages);
-        // Math.ceil(count / limit)
-        console.log(nextCount)
-        console.log(prewCount)
-        Comments.find().limit(nextCount).skip(prewCount).then(function (users) {
-            console.log(users)
+        pages = Math.ceil(count / limit) == 0 ? 1 : Math.ceil(count / limit);
+        let skip = (page - 1) * limit;
+        let obj = {};
+        Comments.find().then(function (data) {
+            allUsers = data.reduce((cur, next) => {
+                obj[next.username] ? "" : obj[next.username] = true && cur.push(next);
+                return cur;
+            }, []).length //设置cur默认类型为数组，并且初始值为空的数组
+        }).then(function () {
+            Comments.find().limit(limit).skip(skip).sort({"reviewTime":-1}).then(function (users) {
+                responseData.message = '查询成功';
+                responseData.code = 2000;
+                // 如果传入的总页数大于查询出来的总页数 应该返回空数组
+                if (page > pages) {
+                    users = [] 
+                }
+                responseData.data = {
+                    count: count,
+                    pages: pages,
+                    datas: users,
+                    allUsers: allUsers
+                }
+                res.json(responseData);
+            })
         })
+
     })
-    // //计算总页数
-    // pages = Math.ceil(count / limit);
-    // //取值不能超过pages
-    // page = Math.min(page, pages);
-    // //取值不能小于1
-    // page = Math.max(page, 1);
-    // let skip = (page - 1) * limit;
-    // User.find().limit(limit).skip(skip).then(function (users) {
-    //     console.log()
-    //     res.render("admin/user_index", {
-    //         userInfo: req.userInfo,
-    //         users: users,
-    //         count: count,
-    //         pages: pages,
-    //         limit: limit,
-    //         page: page,
-    //         router: "user"
-    //     });
-    // });
-
-
-
 });
 module.exports = router;
