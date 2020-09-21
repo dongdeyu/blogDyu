@@ -88,4 +88,7 @@ router.get("/notes", function (req, res) {
     res.render("main/notes",data)
 })
 
+router.get("/own", function (req, res) {
+    res.render("main/own",data)
+})
 module.exports = router;
