@@ -1,20 +1,22 @@
 .tips {
-  font-size      : 15px;
-  line-height    : 30px;
-  color          : #8a8989;
-  border-bottom  : 1px solid #ddd;
-  height         : 40px;
-  display        : flex;
-  position       : relative;
+  font-size    : 15px;
+  line-height  : 30px;
+  color        : #8a8989;
+  border-bottom: 1px solid #ddd;
+  height       : 40px;
+  display      : flex;
+  position     : relative;
 
 }
-.tipsCont{
+
+.tipsCont {
   margin-left: 50px;
 }
+
 .liker {
   position: absolute;
   top     : -410px;
-  left   : -80px;
+  left    : -80px;
 }
 
 .liker span {
@@ -308,4 +310,60 @@ ul li {
 
 #test {
   margin-top: 30px;
+}
+
+.ownCont ul li {
+  background-color: #fff;
+  border-radius   : 10px;
+  padding         : 20px;
+  margin-bottom   : 20px;
+}
+
+.own-articles {
+  display: flex;
+}
+
+.own-articles img {
+  width       : 220px;
+  height      : 220px;
+  margin-right: 40px;
+}
+
+.own-conts-right p {
+  font-size  : 15px;
+  line-height: 25px;
+  color      : #715e5e;
+  text-indent: 20px;
+}
+
+.readAll {
+  width           : 100px;
+  height          : 30px;
+  line-height     : 30px;
+  border-radius   : 6px;
+  background-color: #e67e22;
+  color           : #fff;
+  text-align      : center;
+  margin-left     : auto;
+  margin-top      : 10px;
+  cursor          : pointer;
+}
+
+.own-title {
+  color        : #08c;
+  margin-bottom: 13px;
+  font-weight  : bold;
+  position     : relative;
+  padding-left : 10px;
+}
+
+.own-title:before {
+  content         : '';
+  width           : 3px;
+  height          : 16px;
+  background-color: #08c;
+  position        : absolute;
+  left            : 0;
+  top             : 2px;
+  border-radius   : 5px;
 }

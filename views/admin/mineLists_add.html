@@ -1,0 +1,29 @@
+<!-- 
+    date:2020 09 22
+    authoer:ddyu
+    contents:关于我的增加页面
+ -->
+ {% extends 'layout.html' %}
+
+ {% block main%}
+ <script src="/public/js/mine.js"></script>
+ <ol class="breadcrumb">
+     <li><a href="/admin">我的管理</a></li>
+     <li><span>我的编辑</span></li>
+ </ol>
+ 
+ <form role="form" method="post">
+     <div class="form-group">
+         <label for="name">标题</label>
+         <input type="text" class="form-control" name="content" id="content"
+             placeholder="请输入标题" />
+     </div>
+     <div class="form-group">
+        <label for="name">图片</label>
+        <input type="file" class="form-control" name="image" id="image" accept="image/*" />
+    </div>
+    <div id="summernote2"></div>
+    <div id="summernote3"></div>
+     <button type="submit" class="btn btn-default">提交</button>
+ </form>
+ {% endblock %}

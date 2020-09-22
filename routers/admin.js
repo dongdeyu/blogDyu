@@ -471,6 +471,7 @@ router.get("/message", function (req, res) {
             });
         });
     })
+
 })
 
 /*
@@ -592,6 +593,29 @@ router.get("/message/delete", function (req, res) {
             url: "/admin/message"
         });
     })
+})
+
+
+
+/**
+* 关于我的 列表页
+**/
+router.get("/mineLists",function(req,res,next){
+    res.render("admin/mineLists_index", {
+        // contents: contents,
+        // count: count,
+        // pages: pages,
+        // limit: limit,
+        // page: page,
+    });
+})
+
+
+/**
+* 关于我的 列表页
+**/
+router.get("/mineLists_add",function(req,res,next){
+    res.render("admin/mineLists_add");
 })
 
 
