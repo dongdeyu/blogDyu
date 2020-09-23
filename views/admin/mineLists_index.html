@@ -3,37 +3,49 @@
     authoer:ddyu
     contents:关于我的列表内容
  -->
- {% extends 'layout.html' %}
+{% extends 'layout.html' %}
 
- {% block main%}
- <ol class="breadcrumb">
-     <li><a href="/admin">留言管理</a></li>
-     <li><span>留言列表</span></li>
- </ol>
- <h3>内容列表</h3>
- <table class="table table-hover table-bordered table-striped">
- 
-     <tr>
-         <th>ID</th>
-         <th>内容</th>
-         <th>评论人</th>
-         <th>添加时间</th>
-         <th>操作</th>
-     </tr>
-     <!-- {% for content in contents %}
-     <tr>
-         <td>{{content.id.toString()}}</td>
-         <td>{{content.content}}</td>
-         <td>{{content.username}}</td>
-         <td>{{content.reviewTime|date('Y-m-d H:i:s',-8*60)}}</td>
-         <td>
-             <a href="/admin/message/edit?id={{content._id.toString()}}">修改</a>
-             <a href="/admin/message/delete?id={{content._id.toString()}}">删除</a>
-         </td>
-     </tr>
-     {% endfor %} -->
- </table>
- {% include "page.html" %}
- {% endblock %}
- 
- 
+{% block main%}
+<ol class="breadcrumb">
+    <li><a href="/admin">留言管理</a></li>
+    <li><span>留言列表</span></li>
+</ol>
+<h3>内容列表2</h3>
+<table class="table table-hover table-bordered table-striped">
+
+    <tr>
+        <th>ID</th>
+        <th>标题</th>
+        <th>添加时间</th>
+        <th>内容简介</th>
+        <th>内容详情</th>
+        <th>图片</th>
+        <th>操作</th>
+    </tr>
+    {% for content in contents %}
+    <tr class="tr">
+        <td>{{content.id.toString()}}</td>
+        <td>{{content.title}}</td>
+        <td>{{content.reviewTime|date('Y-m-d H:i:s',-8*60)}}</td>
+        <td class="contentInfo">{{content.contentInfo}}</td>
+        <td id="contentDetail">{{content.contentDetail}}</td>
+        <td>
+            <img width="30" src={{content.url}} alt="">
+        </td>
+        <td>
+            <a href="/admin/message/edit?id={{content._id.toString()}}">修改</a>
+            <a href="/admin/message/delete?id={{content._id.toString()}}">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<script>
+    let str = []
+    for (let i = 0; i < $(".tr").length; i++) {
+        str[i] = $(".contentInfo").eq(i).text()
+        $(".contentInfo").eq(i).html('')
+        $(".contentInfo").eq(i).append(str[i])
+    }
+</script>
+{% include "page.html" %}
+{% endblock %}

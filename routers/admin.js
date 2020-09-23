@@ -4,6 +4,8 @@ let User = require("../models/Users")
 let Category = require("../models/Category")
 let Content = require("../models/Content")
 let Comments = require("../models/Comments")
+let Own = require("../models/Own")
+
 //统一返回模式
 let responseData;
 //初始化
@@ -468,6 +470,7 @@ router.get("/message", function (req, res) {
                 pages: pages,
                 limit: limit,
                 page: page,
+                router: "message"
             });
         });
     })
@@ -601,22 +604,62 @@ router.get("/message/delete", function (req, res) {
 * 关于我的 列表页
 **/
 router.get("/mineLists",function(req,res,next){
-    res.render("admin/mineLists_index", {
-        // contents: contents,
-        // count: count,
-        // pages: pages,
-        // limit: limit,
-        // page: page,
-    });
+    let page = Number(req.query.page || 1);
+    const limit = 10;
+    let pages = 0;
+    //查询数据库的总条数 用count方法
+    Own.count().then(function (count) {
+        //计算总页数
+        pages = Math.ceil(count / limit);
+        //取值不能超过pages
+        page = Math.min(page, pages);
+        //取值不能小于1
+        page = Math.max(page, 1);
+        let skip = (page - 1) * limit;
+        Own.find().sort({ _id: -1 }).limit(limit).skip(skip).sort({ reviewTime: -1 }).then(function (contents) {
+            console.log(contents)
+            res.render("admin/mineLists_index", {
+                contents: contents,
+                count: count,
+                pages: pages,
+                limit: limit,
+                page: page,
+                router: "mineLists"
+            });
+        });
+    })
 })
 
 
 /**
-* 关于我的 列表页
+* 关于我的 增加页面
 **/
 router.get("/mineLists_add",function(req,res,next){
     res.render("admin/mineLists_add");
 })
+
+
+/**
+* 关于我的 增加接口
+**/
+router.post("/mine/add",function(req,res){
+    console.log(req.body)
+    new Own({
+        title: req.body.title,
+        reviewTime: new Date(),
+        url:req.body.url,
+        contentInfo:req.body.contentInfo,
+        contentDetail:req.body.contentDetail,
+    }).save().then(function (rs) {
+        res.render('admin/success', {
+            userInfo: req.userInfo,
+            message: '修改成功',
+            url: '/admin/message'
+        });
+    });
+   
+})
+
 
 
 /*
