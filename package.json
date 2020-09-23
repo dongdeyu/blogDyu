@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ali-oss": "^6.10.0",
     "body-parser": "^1.15.2",
     "cookies": "^0.6.1",
     "express": "^4.17.1",
