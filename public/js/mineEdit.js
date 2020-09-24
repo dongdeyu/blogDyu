@@ -1,5 +1,5 @@
 
-var url = ''
+var url = $('#img').attr('src')
 $('#summernote2').summernote({
     placeholder: 'Hello Bootstrap 4',
     tabsize: 2,
@@ -10,6 +10,12 @@ $('#summernote3').summernote({
     tabsize: 2,
     height: 100
 });
+let str = $("#summernote2").text();
+$(".sum01").find(".card-block").html('')
+$(".sum01").find(".card-block").append(str)
+let str2 = $("#summernote3").text()
+$(".sum02").find(".card-block").html('')
+$(".sum02").find(".card-block").append(str2)
 
 var client = new OSS.Wrapper({
     region: 'oss-cn-beijing',
@@ -28,32 +34,34 @@ function uploadPic(obj) {
         var options = { expires: 10000000 }; //options可以传入链接的失效时间
         url = client.signatureUrl(result.name, options);
         console.log(url)
+        $("#img").attr("src",url)
         // 获取url后直接走接口将url传给node 保存在数据库中        
     }).catch(function (err) {
         console.log(err);
     });
 }
 
-console.log($("#sumButton"))
+
 $("#sumButton").click(function () {
     var content1 = $("#summernote2").summernote("code");
     var content2 = $("#summernote3").summernote("code");
     console.log(content1)
     console.log(content2)
-
     $.ajax({
         type: "post",
-        url: "/admin/mine/add",
+        url: "/admin/mine/edit",
         data: {
             title: $("#title").val(),
             contentInfo: content1,
             contentDetail: content2,
             url: url,
+            id:getUrlData().id
         },
         dataType: 'json',
         success: function (result) {
             if (result.code == 10000) {
-                window.location.href='/admin/mineLists'
+               window.location.href='/admin/mineLists'
+                
             }
         },
         error: function (error) {

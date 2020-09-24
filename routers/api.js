@@ -3,7 +3,7 @@ let router = express.Router();
 let User = require("../models/Users");
 let Content = require('../models/Content');
 let Comments = require('../models/Comments');
-
+let Own = require('../models/Own');
 
 //统一返回模式
 let responseData;
@@ -216,5 +216,32 @@ router.post('/getCommentsLists', function (req, res) {
 
     })
 });
+
+router.post('/getOwnLists',function(req,res){
+    let page = Number(req.body.pageSize || 1);
+    const limit = 5;
+    let pages = 0;
+    //查询数据库的总条数 用count方法
+    Own.count().then(function (count) {
+        //计算总页数
+        pages = Math.ceil(count / limit);
+        //取值不能超过pages
+        page = Math.min(page, pages);
+        //取值不能小于1
+        page = Math.max(page, 1);
+        let skip = (page - 1) * limit;
+        console.log(skip)
+        Own.find().sort({ _id: -1 }).limit(limit).skip(skip).sort({ reviewTime: 1 }).then(function (contents) {
+            responseData.code = 2000;
+            responseData.data = {
+                count: count,
+                pages: pages,
+                datas: contents,
+                
+            }
+            res.json(responseData);
+        });
+    })
+})
 
 module.exports = router;

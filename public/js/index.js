@@ -7,8 +7,10 @@ $(function () {
     let $loginBox = $("#loginBox");
     let $registerBox = $("#registerBox");
     let $userInfo = $("#userInfo")
-    console.log($(".demo"))
-    $(".demo").snippet("javascript", { style: "darkness", collapse: false, startCollapsed: false, transparent: false, menu: false });
+    console.log()
+    if($(".demo")!=undefined){
+        $(".demo").snippet("javascript", { style: "darkness", collapse: false, startCollapsed: false, transparent: false, menu: false });
+    }
     //切换
     $loginBox.find("a").on('click', function () {
         $loginBox.hide();

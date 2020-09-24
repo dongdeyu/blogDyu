@@ -8,11 +8,14 @@
     <link href="/public/fontAwesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="/public/css/jquery.snippet.css" rel="stylesheet" type="text/css">
     <link href="/public/css/swiper.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/public/css/currentPage.css">
     <script src="/public/js/jquery-1.12.4.min.js"></script>
     <script src="/public/js/index.js"></script>
     <script src="/public/js/common.js"></script>
     <script src="/public/js/jquery.snippet.js"></script>
     <script src="/public/js/swiper.min.js"></script>
+    <script src="/public//js/currentPage.js"></script>
+
 
     <!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -154,22 +157,22 @@
     // 初始定时器
     let myInterval = null
     /*********************背景粒子特效*************************/
-        //配置
-        var config = {
-            vx: 2,	//小球x轴速度,正为右，负为左
-            vy: 2,	//小球y轴速度
-            height: 3,	//小球高宽，其实为正方形，所以不宜太大
-            width: 3,
-            count: 200,		//点个数
-            color: "230,225,225", 	//点颜色
-            stroke: "204,204,204", 		//线条颜色
-            dist: 10000, 	//点吸附距离
-            e_dist: 10000, 	//鼠标吸附加速距离
-            max_conn: 10 	//点到点最大连接数
-        }
+    //配置
+    var config = {
+        vx: 2,	//小球x轴速度,正为右，负为左
+        vy: 2,	//小球y轴速度
+        height: 3,	//小球高宽，其实为正方形，所以不宜太大
+        width: 3,
+        count: 200,		//点个数
+        color: "230,225,225", 	//点颜色
+        stroke: "204,204,204", 		//线条颜色
+        dist: 10000, 	//点吸附距离
+        e_dist: 10000, 	//鼠标吸附加速距离
+        max_conn: 10 	//点到点最大连接数
+    }
 
-        //调用
-        CanvasParticle(config);
+    //调用
+    CanvasParticle(config);
     /*********************结束*************************/
 
     /*********************音乐播放器功能*************************/

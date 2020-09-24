@@ -651,14 +651,86 @@ router.post("/mine/add",function(req,res){
         contentInfo:req.body.contentInfo,
         contentDetail:req.body.contentDetail,
     }).save().then(function (rs) {
-        res.render('admin/success', {
-            userInfo: req.userInfo,
-            message: '修改成功',
-            url: '/admin/message'
-        });
+        res.json(200, { code: 10000, msg: '内容保存成功' })
     });
    
 })
+/**
+* 关于我的 删除接口
+**/
+router.get("/mine/delete",function(req,res){
+    let id = req.query.id || "";
+    Own.remove({ _id: id }).then(function () {
+        res.render('admin/success', {
+            userInfo: req.userInfo,
+            message: '删除成功',
+            url: "/admin/mineLists"
+        });
+    })
+   
+})
+
+/**
+* 关于我的 编辑页面
+**/
+router.get("/mine/edit",function(req,res){
+    let id = req.query.id || "";
+    Own.findOne({ _id: id }).then(function (own) {
+        if (!own) {
+            res.render("admin/error", {
+                userInfo: req.userInfo,
+                message: "指定内容不存在"
+            })
+            return Promise.reject()
+        } else {
+            console.log()
+            res.render("admin/mineLists_edit", {
+                userInfo: req.userInfo,
+                own: own,
+            })
+        }
+    })
+   
+})
+
+/**
+* 关于我的 编辑页面按钮提交
+**/
+router.post("/mine/edit",function(req,res){
+    let title = req.body.title || "";
+    let contentInfo = req.body.contentInfo || "";
+    let contentDetail = req.body.contentDetail || "";
+    let url = req.body.url || "";
+    let id = req.body.id || "";
+    Own.findOne({ _id: id }).then(function (own) {
+        //找不到id
+        if (!own) {
+            res.render('admin/error', {
+                userInfo: req.userInfo,
+                message: '分类信息不存在'
+            });
+            return Promise.reject();
+        } else {
+           //要修改的分类名称是否在数据库中存在
+           return Own.findOne({
+                _id: { $ne: id },
+            })
+        }
+    }).then(function () {
+        console.log(id)
+        return Own.update({
+            _id: id,
+        },{
+            title:title,
+            contentInfo:contentInfo,
+            contentDetail:contentDetail,
+            url:url
+        });
+    }).then(function () {
+        res.json(200, { code: 10000, msg: '内容保存成功' })
+    })
+})
+
 
 
 
