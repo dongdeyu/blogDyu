@@ -45,10 +45,10 @@
 
     <nav>
         <div class="menu">
-            <a href="/" class="focus">首页</a>
-            <a href="/">全部文章</a>
-            <a href="/notes">学无止境</a>
-            <a href="/notes">慢生活</a>
+            <a href="/" >首页</a>
+            <a href="/article">全部文章</a>
+            <a href="/stydy">学无止境</a>
+            <a href="/slowLive">慢生活</a>
             <a href="/own">关于我的</a>
             <a href="/notes">留言板</a>
             <!-- {%for cate in categories%}
@@ -251,5 +251,19 @@
             // !arr.length && myAudio.removeEventListener('ended', playEndedHandler, false);//只有一个元素时解除绑定 
         }
     }
+    // 获取当前路由
+
+    let route = window.location.pathname
+    console.log()
+    let length = $(".menu").find('a').length
+    let str
+    for (let i = 0; i < length; i++) {
+        if (route == $(".menu").find('a').eq(i).attr("href")) {
+            str = i
+        }
+    }
+    $(".menu").find('a').eq(str).addClass("focus")
+    // console.log(.attr('href'))
+
     /*******************循环播放结束**************************/
 </script>
