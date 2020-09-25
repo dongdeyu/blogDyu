@@ -89,6 +89,7 @@ router.post("/user/login", function (req, res, next) {
         return;
     }
     //从数据库中查询用户名和密码是否一致，如果存在则登录成功
+    console.log(9999)
     User.findOne({
         username: username,
         password: password
