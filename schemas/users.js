@@ -6,6 +6,9 @@ module.exports= new mongoose.Schema({
     username:String,
     //密码
     password:String,
+    sex:Number,
+    logo:String,
+    email:String,
     //是否是管理员
     isAdmin:{
         type:Boolean,

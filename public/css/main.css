@@ -455,3 +455,7 @@ footer .fotBox span {
   display: none;
   cursor: pointer;
 }
+.changePerson{
+  cursor: pointer;
+  color: #08c;
+}

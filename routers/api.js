@@ -66,7 +66,10 @@ router.post("/user/register", function (req, res, next) {
             //保存用户注册的信息到数据库中
             let user = new User({
                 username: username,
-                password: password
+                password: password,
+                sex:'男',
+                logo:'',
+                email:''
             });
             return user.save();
         }
@@ -104,11 +107,17 @@ router.post("/user/login", function (req, res, next) {
             responseData.message = "登录成功";
             responseData.userInfo = {
                 id: userInfo.id,
-                username: userInfo.username
+                username: userInfo.username,
+                email:userInfo.email,
+                logo:userInfo.logo,
+                sex:userInfo.sex,
             }
             req.cookies.set("userInfo", JSON.stringify({
                 _id: userInfo._id,
-                username: userInfo.username
+                username: userInfo.username,
+                sex:userInfo.sex,
+                logo:userInfo.logo,
+                email:userInfo.email,
             }));
             res.json(responseData);
             return;
@@ -245,4 +254,9 @@ router.post('/getOwnLists',function(req,res){
     })
 })
 
+
+router.post('/setUserInfo',function(req, res){
+    console.log(999)
+    console.log(req.body)
+})
 module.exports = router;

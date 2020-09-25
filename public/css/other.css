@@ -368,3 +368,46 @@ ul li {
   top             : 2px;
   border-radius   : 5px;
 }
+
+.changeInfo {
+  font-size       : 15px;
+  padding         : 20px;
+  background-color: #fff;
+  min-height      : 300px;
+
+}
+
+.Infolists {
+  display      : flex;
+  margin-bottom: 20px;
+}
+
+.Infolists label {
+  width      : 100px;
+  display    : block;
+  height     : 40px;
+  line-height: 40px;
+}
+
+.Infolists input {
+  border       : none;
+  outline      : none;
+  border       : 1px solid #ddd;
+  height       : 36px;
+  padding-left : 20px;
+  border-radius: 5px;
+  display      : block;
+  width        : 250px;
+}
+
+.buttons-sub {
+  width           : 200px;
+  height          : 40px;
+  line-height     : 40px;
+  border-radius   : 6px;
+  background-color: #e67e22;
+  color           : #fff;
+  text-align      : center;
+  margin          : 40px auto;
+  cursor          : pointer;
+}

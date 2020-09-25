@@ -91,4 +91,9 @@ router.get("/notes", function (req, res) {
 router.get("/own", function (req, res) {
     res.render("main/own",data)
 })
+router.get("/changeUserInfo", function (req, res) {
+    res.render("main/changeUserInfo", data)
+})
+
+
 module.exports = router;

@@ -22,6 +22,8 @@
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
     <script src="/public/js/canvas-particle.js"></script>
+    
+    <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-4.4.4.min.js"></script>
 
 </head>
 
@@ -82,7 +84,8 @@
                         <a href="/admin/login">进入管理</a>
                     </p>
                     {% else %}
-                    <p><span class="colDanger">你好，欢迎光临我的博客！</span></p>
+                    <p><span class="colDanger">你好，欢迎光临我的博客！</span><span class="changePerson">修改个人信息</span></p>
+
                     {% endif %}
 
                     <p><span class="colDark"><a href="javascript:;" id="logout">退出</a></span></p>
@@ -251,10 +254,12 @@
             // !arr.length && myAudio.removeEventListener('ended', playEndedHandler, false);//只有一个元素时解除绑定 
         }
     }
-    // 获取当前路由
 
+    /*******************循环播放结束**************************/
+
+
+    /*******************获取当前路由**************************/
     let route = window.location.pathname
-    console.log()
     let length = $(".menu").find('a').length
     let str
     for (let i = 0; i < length; i++) {
@@ -263,11 +268,14 @@
         }
     }
     $(".menu").find('a').eq(str).addClass("focus")
-    if (route == '/'||route=='/view') {
+    if (route == '/' || route == '/view') {
         $(".demo").snippet("javascript", { style: "darkness", collapse: false, startCollapsed: false, transparent: false, menu: false });
 
     }
-    // console.log(.attr('href'))
+    /*******************获取当前路由结束**************************/
 
-    /*******************循环播放结束**************************/
+    /*******************跳转到个人信息页面**************************/
+    $(".changePerson").click(function(){
+        window.location.href = '/changeUserInfo'
+    })
 </script>

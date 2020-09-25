@@ -1,0 +1,37 @@
+{%extends 'layout.html'%}
+
+{%block content%}
+<link href="/public/css/other.css" rel="stylesheet" type="text/css">
+<div class="changeInfo">
+    <div class="Infolists">
+        <label for="name">昵&nbsp;&nbsp;&nbsp;&nbsp;称</label>
+        <input id="username" type="text" value="{{userInfo.username}}" placeholder="请输入昵称">
+    </div>
+    <div class="Infolists">
+        <label for="name">性&nbsp;&nbsp;&nbsp;&nbsp;别</label>
+        <input id="sex" type="text" value="{{userInfo.sex}}" placeholder="请输入性别">
+    </div>
+    <div class="Infolists">
+        <label for="name">邮&nbsp;&nbsp;&nbsp;&nbsp;箱</label>
+        <input id="email" type="text" value="{{userInfo.email}}" placeholder="请输入邮箱">
+    </div>
+    <div class="Infolists">
+        <label for="name">头&nbsp;&nbsp;&nbsp;&nbsp;像</label>
+        {% if userInfo.logo=='' %}
+        <img src='/public/images/head.jpg'>
+        {% else %}
+        123
+        {% endif %}
+        <input type="file" name="picFieldName" id="picFieldId" onchange="uploadPic(this)" accept="image/*" />
+    </div>
+    <div class="buttons-sub">
+        保存
+    </div>
+</div>
+<script src="/public/layer/layer.js"></script>
+<script src="/public/js/utils.js"></script>
+<script src="/public/js/userInfo.js"></script>
+<script>
+    
+</script>
+{%endblock%}
