@@ -67,7 +67,7 @@ router.post("/user/register", function (req, res, next) {
             let user = new User({
                 username: username,
                 password: password,
-                sex:'男',
+                sex:1,
                 logo:'',
                 email:''
             });

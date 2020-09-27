@@ -1,42 +1,39 @@
-var url = ''
-var client = new OSS.Wrapper({
-    region: 'oss-cn-beijing',
-    accessKeyId: 'LTAI4G1JtCSQop12y2EFAjiv',
-    accessKeySecret: 'gGg3RYltVfDF2UAsijIdtcCq0a9Mij',
-    bucket: 'dongdeyu',
-    secure: true
-});
+$(function(){
+    if ($("#myId2").val() == 1) {
+        $("#sex").find('input').eq(0).attr("checked", "checked")
+    } else {
+        $("#sex").find('input').eq(1).attr("checked", "checked")
+    }
+})
 
-function uploadPic(obj) {
-    var file = obj.files[0];//获取文件流
-    var val = obj.value;
-    var suffix = val.substr(val.indexOf("."));
-    var storeAs = 'blog/' + timestamp() + suffix;
-    client.multipartUpload(storeAs, file).then(function (result) {
-        var options = { expires: 10000000 }; //options可以传入链接的失效时间
-        url = client.signatureUrl(result.name, options);
-        $(".Infolists img").attr("src",url)
-        console.log(url)
-        // 获取url后直接走接口将url传给node 保存在数据库中        
-    }).catch(function (err) {
-        console.log(err);
-    });
-}
-$(".buttons-sub").click(function(){
-    console.log( $("#username").val())
-    console.log( $("#sex").val())
-    console.log( $("#email").val())
-    console.log(url)
 
+$(".buttons-sub").click(function () {
+    var url = $("#headImg")[0].src
+    if ($("#username").val() == "") {
+        layer.msg("请输入昵称");
+        return false
+    }
+    if ($("#email").val() == "") {
+        layer.msg("请输入邮箱");
+        return false
+    }
+    if (url == "") {
+        layer.msg("请上传头像");
+        return false
+    }
+    if (!regEmail.test($("#email").val())) {
+        layer.msg("请输入正确的邮箱");
+        return false
+    }
     $.ajax({
         type: "post",
         url: "/api/setUserInfo",
         data: {
-            username:$("#username").val(),
+            username: $("#username").val(),
             email: $("#email").val(),
-            sex: $("#sex").val(),
+            sex: $("#sex").find("input:checked").val(),
             logo: url,
-            id:$("#myId").val()
+            id: $("#myId").val()
         },
         dataType: 'json',
         success: function (result) {
@@ -49,3 +46,25 @@ $(".buttons-sub").click(function(){
         }
     })
 })
+var client = new OSS.Wrapper({
+    region: 'oss-cn-beijing',
+    accessKeyId: 'LTAI4G1JtCSQop12y2EFAjiv',
+    accessKeySecret: 'gGg3RYltVfDF2UAsijIdtcCq0a9Mij',
+    bucket: 'dongdeyu',
+    secure: true
+});
+function uploadPic(obj) {
+    var file = obj.files[0];//获取文件流
+    var val = obj.value;
+    var suffix = val.substr(val.indexOf("."));
+    var storeAs = 'blog/' + timestamp() + suffix;
+    client.multipartUpload(storeAs, file).then(function (result) {
+        var options = { expires: 10000000 }; //options可以传入链接的失效时间
+        url = client.signatureUrl(result.name, options);
+        $(".Infolists img").attr("src", url)
+        console.log(url)
+        // 获取url后直接走接口将url传给node 保存在数据库中        
+    }).catch(function (err) {
+        console.log(err);
+    });
+}

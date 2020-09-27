@@ -411,3 +411,46 @@ ul li {
   margin          : 40px auto;
   cursor          : pointer;
 }
+
+.gman {
+  width       : 20px !important;
+  margin-top  : 10px;
+  height      : 20px !important;
+  margin-right: 10px;
+  cursor      : pointer;
+}
+
+.headImgSpan img {
+  width        : 30px;
+  height       : 30px;
+  border-radius: 100%;
+}
+
+.headImgSpan,
+.colDark {
+  display: block;
+  float  : left;
+  cursor : pointer;
+}
+
+.rightBox p {
+  overflow: hidden;
+}
+
+.colDark {
+  margin-left: 10px;
+  margin-top : 5px;
+}
+
+#headImg2 {
+  width       : 80px;
+  height      : 80px;
+  margin-right: 15px;
+}
+
+#picFieldId {
+  width       : 72px;
+  padding-left: 0;
+  border      : none;
+  cursor: pointer;
+}

@@ -76,7 +76,16 @@
                 {% if userInfo._id %}
                 <div class="rightBox" id="userInfo">
                     <div class="title"><span>用户信息</span></div>
-                    <p><span class="colDark">{{userInfo.username}}</span></p>
+                    <p>
+                        <span class="headImgSpan">
+                            {% if userInfo.logo=='' %}
+                            <img id="headImg" src='/public/images/head.jpg'>
+                            {% else %}
+                            <img id="headImg" src='{{userInfo.logo}}'>
+                            {% endif %}
+                        </span>
+                        <span class="colDark">{{userInfo.username}}</span>
+                    </p>
 
                     {% if userInfo.isAdmin %}
                     <p>
@@ -153,7 +162,8 @@
         弹出来
     </div>
     <div id="audioBox" style="display: none;"></div>
-    <input id="myId" type="text" value="{{userInfo._id}}" hidden>
+    <input id="myId" type="text" value="{{userInfo._id}}" hidden />
+    <input id="myId2" type="text"  value="{{userInfo.sex}}" hidden />
 </body>
 
 </html>
@@ -272,6 +282,10 @@
     if (route == '/' || route == '/view') {
         $(".demo").snippet("javascript", { style: "darkness", collapse: false, startCollapsed: false, transparent: false, menu: false });
 
+    }
+    if(route == '/changeUserInfo'){
+        $(".changePerson").hide()
+        $(".colDark a").hide()
     }
     /*******************获取当前路由结束**************************/
 

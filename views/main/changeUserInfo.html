@@ -7,9 +7,10 @@
         <label for="name">昵&nbsp;&nbsp;&nbsp;&nbsp;称</label>
         <input id="username" type="text" value="{{userInfo.username}}" placeholder="请输入昵称">
     </div>
-    <div class="Infolists">
+    <div class="Infolists" id="sex">
         <label for="name">性&nbsp;&nbsp;&nbsp;&nbsp;别</label>
-        <input id="sex" type="text" value="{{userInfo.sex}}" placeholder="请输入性别">
+       <input type="radio" name="gender" class="gman" id="g_man" value="1"  /><span class="gman">男</span>    
+       <input type="radio" name="gender" class="gman" id="g_woman" value="2"  /><span class="gman">女</span>  
     </div>
     <div class="Infolists">
         <label for="name">邮&nbsp;&nbsp;&nbsp;&nbsp;箱</label>
@@ -18,11 +19,12 @@
     <div class="Infolists">
         <label for="name">头&nbsp;&nbsp;&nbsp;&nbsp;像</label>
         {% if userInfo.logo=='' %}
-        <img src='/public/images/head.jpg'>
+        <img id="headImg2" src='/public/images/head.jpg'>
         {% else %}
-        <img src='{{userInfo.logo}}'>
+        <img id="headImg2" src='{{userInfo.logo}}'>
         {% endif %}
         <input type="file" name="picFieldName" id="picFieldId" onchange="uploadPic(this)" accept="image/*" />
+       
     </div>
     <div class="buttons-sub">
         保存
