@@ -258,5 +258,37 @@ router.post('/getOwnLists',function(req,res){
 router.post('/setUserInfo',function(req, res){
     console.log(999)
     console.log(req.body)
+    let username = req.body.username || "";
+    let email = req.body.email || "";
+    let sex = req.body.sex || "";
+    let logo = req.body.logo || "";
+    let id = req.body.id || "";
+    User.findOne({ _id: id }).then(function (own) {
+        return User.findOne({
+            _id: { $ne: id },
+        })
+    }).then(function () {
+        console.log(id)
+        return User.update({
+            _id: id,
+        },{
+            username:username,
+            email:email,
+            sex:sex,
+            logo:logo
+        });
+    }).then(function () {
+        console.log(999)
+        req.cookies.set("userInfo", JSON.stringify({
+            _id: id,
+            username: username,
+            sex:sex,
+            logo:logo,
+            email:email,
+        }));
+        res.json(200, { code: 10000, msg: '修改成功' })
+    })
+
+
 })
 module.exports = router;

@@ -20,7 +20,7 @@
         {% if userInfo.logo=='' %}
         <img src='/public/images/head.jpg'>
         {% else %}
-        123
+        <img src='{{userInfo.logo}}'>
         {% endif %}
         <input type="file" name="picFieldName" id="picFieldId" onchange="uploadPic(this)" accept="image/*" />
     </div>

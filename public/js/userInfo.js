@@ -36,12 +36,12 @@ $(".buttons-sub").click(function(){
             email: $("#email").val(),
             sex: $("#sex").val(),
             logo: url,
-            // id:
+            id:$("#myId").val()
         },
         dataType: 'json',
         success: function (result) {
             if (result.code == 10000) {
-                window.location.href='/admin/mineLists'
+                window.location.reload()
             }
         },
         error: function (error) {
