@@ -47,11 +47,11 @@ $(".buttons-sub").click(function () {
     })
 })
 var client = new OSS.Wrapper({
-    region: 'oss-cn-beijing',
-    accessKeyId: 'LTAI4G1JtCSQop12y2EFAjiv',
-    accessKeySecret: 'gGg3RYltVfDF2UAsijIdtcCq0a9Mij',
-    bucket: 'dongdeyu',
-    secure: true
+    // region: 'oss-cn-beijing',
+    // accessKeyId: 'LTAI4G1JtCSQop12y2EFAjiv',
+    // accessKeySecret: 'gGg3RYltVfDF2UAsijIdtcCq0a9Mij',
+    // bucket: 'dongdeyu',
+    // secure: true
 });
 function uploadPic(obj) {
     var file = obj.files[0];//获取文件流

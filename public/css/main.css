@@ -459,3 +459,31 @@ footer .fotBox span {
   cursor: pointer;
   color: #08c;
 }
+.rightBox p {
+  overflow: hidden;
+}
+.headImgSpan img {
+  width        : 30px;
+  height       : 30px;
+  border-radius: 100%;
+}
+
+.headImgSpan,
+.colDark {
+  display: block;
+  float  : left;
+  cursor : pointer;
+}
+
+
+
+.colDark {
+  margin-left: 10px;
+  margin-top : 5px;
+}
+
+#headImg2 {
+  width       : 80px;
+  height      : 80px;
+  margin-right: 15px;
+}

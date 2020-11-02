@@ -11,11 +11,14 @@ let swig = require("swig");
 //加载数据库模块
 let mongoose = require("mongoose");
 
+//加载mysql
+var mysql = require('mysql');
+
 //加载body-parser，用来处理post提交过来的数据
 let bodyParser = require("body-parser");
 
 let Cookies = require("cookies")
-    //创建app应用 => NodeJs Http.createServer();
+//创建app应用 => NodeJs Http.createServer();
 let app = express();
 let User = require("./models/Users");
 //设置静态文件托管
@@ -40,28 +43,28 @@ swig.setDefaults({ cache: false })
 app.use(bodyParser.urlencoded({ extended: true }))
 
 //cookies设置
-app.use(function(req, res, next) {
-        req.cookies = new Cookies(req, res);
-        //解析登录用户的cookie信息
-        req.userInfo = {};
-        if (req.cookies.get("userInfo")) {
-            try {
-                req.userInfo = JSON.parse(req.cookies.get("userInfo"))
-                    //判断当前用户是否为管理员
-                User.findById(req.userInfo._id).then(function(userInfo) {
-                    req.userInfo.isAdmin = Boolean(userInfo.isAdmin);
-                    next();
-                })
-            } catch (e) {
+app.use(function (req, res, next) {
+    req.cookies = new Cookies(req, res);
+    //解析登录用户的cookie信息
+    req.userInfo = {};
+    if (req.cookies.get("userInfo")) {
+        try {
+            req.userInfo = JSON.parse(req.cookies.get("userInfo"))
+            //判断当前用户是否为管理员
+            User.findById(req.userInfo._id).then(function (userInfo) {
+                req.userInfo.isAdmin = Boolean(userInfo.isAdmin);
                 next();
-            }
-        } else {
+            })
+        } catch (e) {
             next();
         }
-    })
-    /*
-     * 根据不同的功能划分模块
-     * */
+    } else {
+        next();
+    }
+})
+/*
+ * 根据不同的功能划分模块
+ * */
 app.use("/admin", require('./routers/admin'))
 app.use("/api", require('./routers/api'))
 app.use("/", require('./routers/main'))
@@ -77,11 +80,23 @@ app.use("/", require('./routers/main'))
 // })
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/blog', { useNewUrlParser: true,useUnifiedTopology:true });
+mongoose.connect('mongodb://localhost:27017/blog', { useNewUrlParser: true, useUnifiedTopology: true });
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '123456',
+    database: 'test'
+});
+connection.connect();
+connection.query('SELECT * FROM stuinfo', function (error, results, fields) {
+    if (error) throw error;
+    console.log('The solution is: ', results);
+});
 let db = mongoose.connection
 
+
 db.on('error', console.error.bind(console, '连接错误:'));
-db.once('open', function() {
+db.once('open', function () {
     console.log('数据库连接成功');
     app.listen(8089);
 })
