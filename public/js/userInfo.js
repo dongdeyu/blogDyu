@@ -20,7 +20,7 @@ $(".buttons-sub").click(function () {
     if (url == "") {
         layer.msg("请上传头像");
         return false
-    }
+    } 
     if (!regEmail.test($("#email").val())) {
         layer.msg("请输入正确的邮箱");
         return false
