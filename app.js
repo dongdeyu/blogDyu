@@ -10,9 +10,8 @@ let swig = require("swig");
 
 //加载数据库模块
 let mongoose = require("mongoose");
+let connection = require("./utils/mysql")
 
-//加载mysql
-var mysql = require('mysql');
 
 //加载body-parser，用来处理post提交过来的数据
 let bodyParser = require("body-parser");
@@ -81,20 +80,13 @@ app.use("/", require('./routers/main'))
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/blog', { useNewUrlParser: true, useUnifiedTopology: true });
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '123456',
-    database: 'test'
-});
+
 connection.connect();
 connection.query('SELECT * FROM stuinfo', function (error, results, fields) {
     if (error) throw error;
     console.log('The solution is: ', results);
 });
 let db = mongoose.connection
-
-
 db.on('error', console.error.bind(console, '连接错误:'));
 db.once('open', function () {
     console.log('数据库连接成功');
